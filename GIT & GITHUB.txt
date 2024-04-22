@@ -1,0 +1,63 @@
+GIT and GITHUB-
+
+GIT:
+1- It is a version control system, to track the changes in the code or to track the history of the code means the diffrent diffrent upgradations that we make in our code.
+   it helps is going back to any point in the code.
+2-It hepls in collaboration between deiffrent people making their own projects or parts of project on their respective system.
+3-It is a software/tool/method/process.
+
+GITHUB:
+1- it is a website that allows developers to showcase or store their codes using git calleds as REPOS/REPOSITORIES.
+   And it is basically an open source.
+   and we upload the code in the form of folders.
+
+
+-README file- this file basically contains the brief or the detailed explanation of our code or project and functionality when we intsialise in our project
+ ITS good to make a readme file.
+
+-CHANGES is called commit in github.
+and the first change in project is called intial commit.
+
+-TO MAKE CHNANGES IN THE README file html is written inside that. 
+
+---------------------------------------------------------------------------------------------------------
+
+ --- TO USE GIT we should have VS code and git bash installed in the system.
+Tilde sign means the root directory or parent directory
+  
+--Configuring git:
+
+git config --global.username "My Name" 
+git config --global user.email "abc@email.com" 
+git config --list
+
+COMMANDS IN GIT-
+1-clone and status:
+
+-to copy any github REPO (remote) to our local pc or laptop:
+ git clone "link"
+
+2- "ls -a" this command is used to see all the files or the hidden files in which "git" is used
+and all folders will have git file.
+
+3-"git status" to check the status of the code
+
+4- to add all files - git add file name
+5-commit- it is the record of change 
+git commit -m "some message"
+
+6-push command- upload local repo content to remote repo means github
+   git push origin main 
+out of all the repos of the github the one that is the main repo where we have everything there we want to push this local repo of our system...
+  
+7-init command
+
+init- used to create a new git repository
+
+a- git init-to intialsie a git 
+b-git remote add origin
+
+
+
+
+

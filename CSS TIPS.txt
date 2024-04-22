@@ -1,0 +1,98 @@
+create one restful service and use rest api with springboot application and perform crud operation
+=============================================================   CSS TIPS   ===============================================================
+
+TAILWIND TIPS:
+1-when we write top-1/2 this means that content will adjust half length from the top of the screen and 
+  left-1/2 means from left it will cover half of the screen   
+  and to bring anything in the center of the screen:" absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%]"
+
+2-leading-none: it means it removes extra line heights from every side of your content
+3-tracking-tighter: it removes extra spaces between the letters of the word(reduce letter spacing)
+4-every css property has "arbitrary values" and that are bascially the values that are extra values when you dont need the normal values example size of the text
+  more than 9xl in tailwind
+
+  The arbitrary values are written in the sqaure brackets.rounded-[10px],-ml-[20px] mr-[10px] etc
+
+5-1-"tailwind.config.js" is very important file in case of tailwind as inside this file we can add multiple option of our choice etc.
+6-try to avoid @apply in your tailwind CSS code on components because soemtimes if we want to give seprate styling in the future to components then we have write more code
+7- if you are working with tailwind then "tailwind.config.js" file is very important in the files section
+8-if you want to give negative margin in tailwind then 
+  -my-2 (negative margin)
+   my-2 (positive margin)
+
+9-FOR GRADIENTS:
+  bg-gradient-to-r from-green-400 to-green-600
+
+10-IF YOU WANT TO BRING SOMETHING FROM VERTCIAL TO HORIZAONTAL AND BRING IT IN CENTER:
+   flex items-center justify-center
+
+11- FOR RESPONSIVENESS TO DIFFRENT SCREENS:
+    md:px-20 // md means medium screen
+    lg:px-40// lg means large screen
+
+12-for good line height use leading tag-"leading-8".
+
+13-to hide the background width of the component we use "overflow:hidden"
+
+14-TO GIVE TEXT COLOR IN TAILWIND:text-gray-800
+
+15-TO GIVE SCREEN SIZE TO ANY COMPONENT OF THE SCREEN WE WRITE:
+   basis-1/3(33.33%), basis-1/2(50%)
+   <div className='basis-1/3 flex-1'>
+     <Image className='rounded-lg object-cover' 
+
+16-You can use any value defined in your opacity scale, or use arbitrary values if you need to deviate from your design tokens-
+   text-blue-600/[.06]" where 0.6 is the opacity value 
+
+17-I have two items that are in "Vertical" line and I want that both should come in horizontal direction side by side ....THE tailwind css property such that they both come in horizontal alignment
+   "FLEX" just apply it in the parent div.
+
+18- And if you want to give horizontal spacing between them then- space-x-4(value according to you)
+   and if you want to give vertical spacing between two elements then- space-y-4(value according to you)
+                          
+   
+
+ *********IF AFTER INSTALLING AND FOLLOWING THE SAME EXACT STEP TO INSTALL TAILWIND CSS even if the tailwind dosent work then 
+      we have to create a "style.css" file that will convert the whole tailwind css code to a custom css code and that will run on the browser.**************
+
+   TO CREATE THAT FILE-
+   "build:css":"tailwind build src/index.css -o public/style.css"
+   WE HAVE TO PASTE THIS DEPENDENCY IN THE PACKAGE.json file .
+
+   and then run this command-"npm run build:css"
+   in the terminal to create the style .css file
+
+
+AND IF ALSO THERE IS NOTHING HAPPEING THEN- AFTER CREATING THIS STYLE.CSS FILE THEN CREATE THE WHOLE PROJECT AND COMPONENT AGAIN.
+
+**************AND THERE IS ALSO ONE ISSUE THAT WHEN ALL THE DEPENDENCIES USED IN THE PROJECT ARE NOT PROPERLY INSTALLED LIKE ROUTER DOM, REACT ICONS etC OR ANY OTHER.
+THEN ALSO THE TAILWIND CSS DOSENT WORK IN THE BROWSER.**************
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BOOTSTRAP TIPS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NORMAL CSS TIPS:

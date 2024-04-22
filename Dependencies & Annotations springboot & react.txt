@@ -1,0 +1,134 @@
+REACT DEPENDENCIES:
+"dayjs": "^1.11.10",
+"react": "^18.2.0",
+"react-dom": "^18.2.0",
+"react-icons": "^4.11.0",
+"react-scripts": "5.0.1",
+"web-vitals": "^2.1.4"
+"eslint": "^8.45.0"
+"vite": "^4.4.5"
+"react-data-table-component": "^7.5.4",
+"styled-components": "^6.1.0"
+"axios": "^1.6.0",
+"redux": "^4.2.1",
+"next": "13.5.4",
+
+Certainly! Here's a brief explanation of each of the listed React dependencies:
+
+1. "dayjs": "^1.11.10"
+   - A lightweight and modern JavaScript date library for parsing, validating, manipulating, and formatting dates.
+
+2. "react": "^18.2.0"
+   - The core React library for building user interfaces using components. This version refers to a major version of React.
+
+3. "react-dom": "^18.2.0"
+   - ReactDOM is a package that provides DOM-specific methods for React. It is used to render React components to the DOM.
+
+4. "react-icons": "^4.11.0"
+   - A collection of popular icon libraries as React components, allowing you to easily include icons in your React application.
+
+5. "react-scripts": "5.0.1"
+   - A set of scripts and configurations used by Create React App to build, start, and test React applications.
+
+6. "web-vitals": "^2.1.4"
+   - A library for measuring web vital metrics like performance, accessibility, and more, providing insights into the user experience.
+
+7. "eslint": "^8.45.0"
+   - ESLint is a static code analysis tool for identifying and fixing problems in your JavaScript code. It helps maintain code quality and consistency.
+
+8. "vite": "^4.4.5"
+   - Vite is a fast, opinionated web dev build tool that serves as a more efficient alternative to traditional bundlers like Webpack. It is often used with React.
+
+9. "react-data-table-component": "^7.5.4"
+   - A React component library for creating responsive and feature-rich data tables in React applications.
+
+10. "styled-components": "^6.1.0"
+    - A popular CSS-in-JS library for styling React components. It allows you to write CSS directly in your JavaScript files.
+
+11. "axios": "^1.6.0"
+    - A promise-based HTTP client for making requests to APIs. Axios simplifies handling HTTP requests and responses.
+
+12. "redux": "^4.2.1"
+    - Redux is a state management library for React applications. It helps manage the state of your application in a predictable way.
+
+13. "next": "13.5.4"
+    - Next.js is a React framework for building server-side rendered (SSR) or static web applications. It simplifies the creation of React applications with features like routing and server-side rendering.
+
+These dependencies are commonly used in React development for tasks ranging from styling and state management to data fetching and web performance measurement.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SPRINGBOOT ANNOTATIONS:(PURPOSE)
+
+1-@CrossOrigin-Enables Cross-Origin Resource Sharing (CORS) for a specific controller or method. 
+              -it is a feature implemented by web browsers to prevent web pages from making requests to a different domain than the one that served the web page. 
+              -it allows you to relax this restriction for specific controllers or methods, making it possible for your web application to make requests to a different domain.
+
+2-@RestController-Indicates that the class is a RESTful controller.
+                 -In Spring, a RESTful controller is responsible for handling HTTP requests and returning responses. 
+                 -The methods annotated with @RequestMapping, @GetMapping, @PostMapping, etc., in a @RestController class define the API endpoints.
+
+3-@Autowired-Automatically injects dependencies.
+            -Used to automatically wire and inject beans (objects,dependencies,functions) of a component into the annotated field, constructor, or method. 
+            -This helps in achieving dependency injection and reducing the boilerplate code for manual bean wiring.
+
+4-@PostMapping, @GetMapping, @DeleteMapping -Specifies the type of HTTP request the annotated method can handle.
+                                            -These annotations are used to map HTTP requests to specific methods in a controller. 
+                                           -For example, @PostMapping is used for handling POST requests, @GetMapping for GET requests, and @DeleteMapping for DELETE requests.
+
+7-@RequestMapping- is a versatile annotation that can be applied at the class or method level. 
+                 -It allows you to define the URI path, HTTP method, and other parameters to map a specific HTTP request to a corresponding method.
+                 - EXAMPLE- @RequestMapping("/product") this means that it is basically used to tell that that what the URL is all about or bascially give the refrence what the data is all about.
+                 - and all the URLs or API calls should be starting with that only
+
+8-@RequestBody-Binds the method/function parameter to the body of the HTTP request.
+              -When used as a method parameter,indicates that the parameter should be populated with the contents of the HTTP request body.
+              - it is mostly used with the POSTmapping requests. jahan pe data fetch karna hota hai...!!!
+
+9-@Override- Indicates that a method in a subclass is intended to override a method in its superclass.
+           -it is basically a java notation rather than a spring notation that helps prevent errors by ensuring that a method is correctly overriding
+
+10-@Entity-Marks a class as a JPA entity.
+          -@Entity marks a Java class as an entity, representing a table in a relational database.
+
+11-@Data-Lombok annotation for generating boilerplate code.
+         Lombok is a library that helps reduce boilerplate code in Java. @Data generates common methods like getters, setters, equals, hashCode, and toString, making the code cleaner and more concise.
+
+12-@Table-Specifies details of the "database table" to which the entity is mapped.
+         -we can do customization in that table also.
+
+13-@Id- Marks a field as the primary key of an entity. and then it uniquely identifies each record in the database table.
+
+14-@GeneratedValue-Used in conjunction with @Id, @GeneratedValue specifies or tells that how the primary key values should be automatically generated. Common strategies include auto-incrementing numbers or using sequences.
+
+15-@Service- Indicates that a class is a service.
+           - used to annotate classes providing business logic or services.
+
+16-@Repository- Marks a class as a Data Access Object (DAO).
+              -typically responsible for interacting with a database or another data source.
+
+17-@controller-Marks a class as a Spring MVC controller.
+              -These controllers handle user requests and return appropriate responses.
+
+18-@springbootApplication -It is often used at the main class to start a Spring Boot application.
+                          - it is the combination of three annoitations-@Configuration, @EnableAutoConfiguration, and @ComponentScan
+
+19-@componentScan-Instructs Spring to scan for annotated components in a specific package.
+                 -Spring will find and register these components during the application startup.
+
+20-@configuration- Indicates that a class declares one or more @Bean methods.
+                 -@Bean is used within @Conf
+
+21-@Bean-@Bean is used within @Configuration classes to declare methods that produce bean instances. 
+         -These beans are then managed by the Spring container.
+
+22-@component-Marks a class as a Spring component.
+             -@Component is a generic stereotype annotation used to indicate that a class is a Spring component and should be automatically detected and registered as a bean in the Spring application context.
+
+23-@MockBean: This annotation is used in Spring Boot tests to mock beans. It tells the testing framework to replace the actual bean with a mock object. This is useful for isolating the unit of code under test from its dependencies, allowing you to control the behavior of those dependencies during testing.
+
+24-@Test: This annotation is used to mark a method as a test method. When a method is annotated with @Test, JUnit knows that it should run this method as a test case. Test methods can contain assertions to verify the correctness of the code under test.
+
+25-@BeforeEach: This annotation is used to mark a method that should be run before each test method in the test class. Commonly used for setup tasks such as initializing objects or setting up mock objects. Methods annotated with @BeforeEach are executed before every @Test method in the test class.
+

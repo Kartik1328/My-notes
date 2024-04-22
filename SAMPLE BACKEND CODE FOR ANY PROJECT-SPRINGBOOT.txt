@@ -1,0 +1,871 @@
+---------------------------------------------****THIS CODE IS the code for the Backend of PMS Module****----------------------------------------------------------
+
+
+MODAL/ENTITY CLASS/ LAYER:
+1-Self assessment table-
+
+package com.pms.Model;
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDate;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+//We have imported an library for the local date. So that the date can be used as a data type.
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "appraisee_self_assessement")
+public class AppraiseeSelfAssessement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name="data",allocationSize=1)
+
+    private Long sa_id;
+//	where ID is written that means it is the primary key of the table and that variable is very important
+//  here ID is for sa_id(self assessment)
+//  bigint is used as Long in java
+    
+    private LocalDate submittedOn;
+    private String overallComments;
+    private int overallRating;
+    private String comment;
+    private String rating;
+    private Long empId;
+}
+
+
+2-appraisee details table-
+
+package com.pms.Model;
+import jakarta.persistence.*;
+import lombok.*;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+//We have imported an library for the local date. So that the date can be used as a data type.
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "appraisee_details")
+public class AppraiseeDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name="data",allocationSize=1)
+
+    private Long id;
+//    wherever @Id is written then that is the primary key
+//	where ID is written that means it is the primary key of the table and that variable is very important
+//  bigint is used as Long in java
+    
+    private String empName;
+    private String designation;
+    private String department;
+    private String mgrName;
+    private String location;
+    private String eStatus;    
+    private String contactNo;
+    private String email;
+    private String employeeId;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REPOSITORY INTERFACE/LAYER:
+
+1-self assessment-
+package com.pms.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.pms.Model.AppraiseeSelfAssessement;
+import java.util.Optional;
+
+//common used things or genric things that we have to use in our code
+
+public interface AppraiseeSelfAssessementRepository extends JpaRepository<AppraiseeSelfAssessement,Long> {
+	Optional<AppraiseeSelfAssessement>findByempId(Long empId);
+
+}
+
+
+2-employee status-
+
+package com.pms.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.pms.Model.EmployeeStatus;
+
+//import java.util.Optional;
+
+public interface EmployeeStatusRepository extends JpaRepository<EmployeeStatus,Long> {
+//	Optional<EmployeeStatus>findByempId(Long empId);
+
+}
+
+
+3- appraisee details-
+
+package com.pms.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.pms.Model.AppraiseeDetails;
+
+public interface AppraiseeDetailsRepository extends JpaRepository<AppraiseeDetails,Long> {
+	
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CONTROLLER CLASS/LAYER:
+
+
+package com.pms.controller;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.pms.Model.AppraiseeSelfAssessement;
+import com.pms.Model.AppraiseeSelfAssessementDraft;
+import com.pms.Model.EmployeeStatus;
+import com.pms.Model.AppraiseeAnnualReview;
+import com.pms.Model.AppraiseeKra;
+import com.pms.Model.AppraiseeManagerAssessment;
+import com.pms.Model.MasterTableDummy;
+import com.pms.ServiceImpl.PMS_ServiceImpl1;
+
+import jakarta.mail.MessagingException;
+
+import com.pms.Model.AppraiseeDetails;
+import com.pms.Model.AppraiseeDevelopmentGoalSetting;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin
+
+public class PMSController1 {
+    
+    @Autowired
+    private PMS_ServiceImpl1 pms_ServiceImpl1;
+    
+//    CONTROLLER "GET API" FOR MASTER DUMMY TABLE
+    
+    @GetMapping("/getByMasterDummy/{mgr_id}")
+    public ResponseEntity<?> getByMgrId(@PathVariable Long mgr_id){
+        List<MasterTableDummy> data = pms_ServiceImpl1.getByMgrId(mgr_id);
+        if(!data.isEmpty()) {
+            return ResponseEntity.ok(data);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+     
+    @GetMapping("/getBySelfAsm/{emp_id}")
+    public ResponseEntity<?> getById(@PathVariable Long emp_id){
+        AppraiseeSelfAssessement assessment = pms_ServiceImpl1.getById(emp_id);
+        if(assessment != null) {
+            return ResponseEntity.ok(assessment);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+    
+    
+    @GetMapping("/getBySelfAsmDraft/{emp_id}")
+    public ResponseEntity<?> getBydraftId(@PathVariable Long emp_id){
+        AppraiseeSelfAssessementDraft assessment = pms_ServiceImpl1.getByDraftId(emp_id);
+        if(assessment != null) {
+            return ResponseEntity.ok(assessment);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+    
+    @GetMapping("/getByProfile/{id}")
+    public ResponseEntity<?> getByProfile(@PathVariable Long id){
+        AppraiseeDetails details = pms_ServiceImpl1.getByProfileId(id);
+        if(details != null) {
+            return ResponseEntity.ok(details);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+    
+    @GetMapping("/getBySelfAsmAll")
+    public ResponseEntity<?> getByKra(){
+        List<AppraiseeKra> assessment = pms_ServiceImpl1.getByKra();
+        if(!assessment.isEmpty()) {
+            return ResponseEntity.ok(assessment);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+    
+    
+    @PostMapping("/postBySelfAsm")
+    public ResponseEntity<?> insert(@RequestBody AppraiseeSelfAssessement assessment) throws MessagingException {
+        AppraiseeSelfAssessement savedAssessment = pms_ServiceImpl1.insert(assessment);
+        if(savedAssessment != null) {
+            return ResponseEntity.ok("inserted");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("not inserted");
+        }
+    }
+    
+    
+    @PostMapping("/postBySelfAsmDraft")
+    public ResponseEntity<?> insert(@RequestBody AppraiseeSelfAssessementDraft assessment_draft) {
+        AppraiseeSelfAssessementDraft savedAssessment = pms_ServiceImpl1.insert(assessment_draft);
+        if(savedAssessment != null) {
+            return ResponseEntity.ok("inserted");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("not inserted");
+        }
+    }
+    
+    @DeleteMapping("/deleteSelfAsmDraft/{sad_id}")
+    public ResponseEntity<String> deleteSelfAsmDraft(@PathVariable Long sad_id) {
+        boolean deleted = pms_ServiceImpl1.deleteSelfAsmDraft(sad_id);
+
+        if (deleted) {
+            return ResponseEntity.ok("Self Assessement draft data successfully deleted");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Draft data not found");
+        }
+    }
+    
+//    HERE I HAVE IMPLEMENTED THE EMAIL TRIGGER IN THE SELF ASSSESSEMNT
+    
+    @PostMapping("/postByMng")
+    public ResponseEntity<?> insert(@RequestBody AppraiseeManagerAssessment manager_assessement){
+    	AppraiseeManagerAssessment savedAssessment = pms_ServiceImpl1.insertmng(manager_assessement);
+        if(savedAssessment != null) {
+            return ResponseEntity.ok("inserted");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("not inserted");
+        }
+    }
+    
+    
+    @GetMapping("/getByManagerAsm/{ma_id}")
+    public ResponseEntity<?> getByManagerId(@PathVariable Long ma_id){
+        AppraiseeManagerAssessment assessment = pms_ServiceImpl1.getByManagerId(ma_id);
+        if(assessment != null) {
+            return ResponseEntity.ok(assessment);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+    
+    
+    @GetMapping("/getByAnnual/{ar_id}")
+    public ResponseEntity<?> getByAnnualId(@PathVariable Long ar_id){
+    	System.out.print(ar_id);
+        AppraiseeAnnualReview review = pms_ServiceImpl1.getByAnnualId(ar_id);
+        if(review != null) {
+            return ResponseEntity.ok(review);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+    
+    @PostMapping("/postByAnnRev")
+    public ResponseEntity<?> insert(@RequestBody AppraiseeAnnualReview annual_review){
+    	
+    	System.out.print(annual_review+"....");
+    	AppraiseeAnnualReview savedAnnualReview = pms_ServiceImpl1.insert(annual_review);
+        if(savedAnnualReview != null) {
+            return ResponseEntity.ok("inserted");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("not inserted");
+        }
+    }
+    
+    @GetMapping("/getByDevGoals/{dg_id}")
+    public ResponseEntity<?> getByDg(@PathVariable Long dg_id){
+        AppraiseeDevelopmentGoalSetting devgoals = pms_ServiceImpl1.getByDgId(dg_id);
+        if(devgoals != null) {
+            return ResponseEntity.ok(devgoals);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not fetched");
+        }
+    }
+    
+    @PostMapping("/postByDg")
+    public ResponseEntity<?> insert(@RequestBody AppraiseeDevelopmentGoalSetting development_goals){
+    	
+    	System.out.print(development_goals+"....");
+    	AppraiseeDevelopmentGoalSetting savedDevelopmentGoals = pms_ServiceImpl1.insert(development_goals);
+        if(savedDevelopmentGoals != null) {
+            return ResponseEntity.ok("inserted");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("not inserted");
+        }
+    }
+    
+    //NOW THE APIs FOR THE EMPLOYEE STATUS TABLE
+    
+    
+    @GetMapping("/getByEmployeeStatus")
+    public List<EmployeeStatus> getemployeePerformance() {
+        return pms_ServiceImpl1.getemployeePerformance();
+    }
+//    since List is used therefore no particular Id is needed to be written in the API
+	
+	@PostMapping("/postByEmployeeStatus")
+    public EmployeeStatus postemployeePerformance(@RequestBody EmployeeStatus employeeStatus)  {
+		EmployeeStatus status = pms_ServiceImpl1.postemployeePerformance(employeeStatus);
+        return status;
+    }
+	
+	 @PostMapping("/postManagerApproval")
+	    public EmployeeStatus postmanagerApproval(@RequestBody EmployeeStatus employeeStatus) throws MessagingException {  
+		 EmployeeStatus status = pms_ServiceImpl1.postmanagerApproval(employeeStatus); 
+	        return status;
+	    }
+}
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SERVICE INTERFACE/LAYER:
+
+package com.pms.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import com.pms.Model.AppraiseeSelfAssessement;
+import com.pms.Model.AppraiseeSelfAssessementDraft;
+import com.pms.Model.EmployeeStatus;
+import com.pms.Model.MasterTableDummy;
+
+import jakarta.mail.MessagingException;
+
+import com.pms.Model.AppraiseeAnnualReview;
+import com.pms.Model.AppraiseeDetails;
+import com.pms.Model.AppraiseeDevelopmentGoalSetting;
+import com.pms.Model.AppraiseeKra;
+import com.pms.Model.AppraiseeManagerAssessment;
+
+@Service
+public interface PMS_Service1 {
+    
+    public AppraiseeSelfAssessement insert(AppraiseeSelfAssessement assessment) throws MessagingException;
+    
+    public AppraiseeSelfAssessementDraft insert(AppraiseeSelfAssessementDraft assessment_draft);
+
+    
+    public List<AppraiseeKra> getByKra();
+    
+    public AppraiseeSelfAssessement getById(Long sa_id);
+    
+    public AppraiseeDetails getByProfileId(Long id);
+
+    
+    public AppraiseeManagerAssessment insertmng(AppraiseeManagerAssessment review);
+    
+    public AppraiseeManagerAssessment getByManagerId(Long ma_id);
+    
+    public AppraiseeAnnualReview getByAnnualId(Long empId);
+    
+    public AppraiseeDevelopmentGoalSetting getByDgId(Long dg_id);
+
+	public AppraiseeDevelopmentGoalSetting insert(AppraiseeDevelopmentGoalSetting development_goals);
+
+	public boolean deleteSelfAsmDraft(Long empid);
+
+	public AppraiseeSelfAssessementDraft getByDraftId(Long emp_id);
+
+	public AppraiseeAnnualReview insert(AppraiseeAnnualReview annual_review);
+
+	public EmployeeStatus insert(EmployeeStatus employee_status);
+	
+	public EmployeeStatus getemployeePerformance(EmployeeStatus employee_status);
+
+
+	public List<MasterTableDummy> getByMgrId(Long mgrId);
+    
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SERVICE IMPL CLASS:
+
+package com.pms.ServiceImpl;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+import com.pms.Model.AppraiseeAnnualReview;
+import com.pms.Model.AppraiseeDetails;
+import com.pms.Model.AppraiseeDevelopmentGoalSetting;
+import com.pms.Model.AppraiseeKra;
+import com.pms.Model.AppraiseeManagerAssessment;
+import com.pms.Model.AppraiseeSelfAssessement;
+import com.pms.Model.AppraiseeSelfAssessementDraft;
+import com.pms.Model.EmployeeStatus;
+import com.pms.Model.MasterTableDummy;
+import com.pms.repository.AppraiseeAnnualReviewRepository;
+import com.pms.repository.AppraiseeDetailsRepository;
+import com.pms.repository.AppraiseeDevelopmentGoalSettingRepository;
+import com.pms.repository.AppraiseeKraRepository;
+import com.pms.repository.AppraiseeManagerAssessmentRepository;
+import com.pms.repository.AppraiseeSelfAssessementRepository;
+import com.pms.repository.AppraiseeSelfAssessmentDraftRepository;
+import com.pms.repository.EmployeeStatusRepository;
+import com.pms.repository.MasterTableDummyRepository;
+import com.pms.service.PMS_Service1;
+
+import jakarta.mail.MessagingException;
+
+@Service
+public class PMS_ServiceImpl1 implements PMS_Service1 { 
+	
+	@Autowired
+	private EmployeeStatusRepository employeeStatusRepository;
+	
+	@Autowired
+    private AppraiseeSelfAssessementRepository appraiseeSelfAssessementRepository;
+	
+	@Autowired
+    private MasterTableDummyRepository masterTableDummyRepository;
+	
+	@Autowired
+    private AppraiseeSelfAssessmentDraftRepository appraiseeSelfAssessementDraftRepository;
+	
+	@Autowired
+    private AppraiseeDevelopmentGoalSettingRepository appraiseeDevelopmentGoalSettingRepository;
+	
+	@Autowired
+    private AppraiseeManagerAssessmentRepository appraiseeManagerAssessementRepository;
+	
+	@Autowired
+    private AppraiseeAnnualReviewRepository appraiseeAnnualReviewRepository;
+	
+	@Autowired
+	private AppraiseeKraRepository appraiseeKraRepository;
+	
+	@Autowired
+	private AppraiseeDetailsRepository appraiseeDetailsRepository;
+	
+	@Autowired
+	MailServiceImpl mailServiceImpl;
+	
+	@Autowired
+	private AppraiseeDevelopmentGoalSettingRepository appraisee_development_goal_setting_Repository;
+	
+	@Override
+	public AppraiseeSelfAssessement insert(AppraiseeSelfAssessement assessment) throws MessagingException {
+
+	    // Check if there are any drafts
+	    boolean hasDrafts = appraiseeSelfAssessementDraftRepository.count() > 0;
+
+	    if (hasDrafts) {
+	        List<AppraiseeSelfAssessementDraft> drafts = appraiseeSelfAssessementDraftRepository.findAll();
+	        
+	        for (AppraiseeSelfAssessementDraft draft : drafts) {
+	            AppraiseeSelfAssessement self = new AppraiseeSelfAssessement();
+	            self.setSubmittedOn(LocalDate.now());
+	            self.setOverallComments(draft.getOverallComments());
+	            self.setOverallRating(draft.getOverallRating());
+	            self.setComment(draft.getComment());
+	            self.setRating(draft.getRating());
+	            self.setEmpId(draft.getEmpId());
+	                              
+	            // Save to appraiseeSelfAssessementRepository
+	            appraiseeSelfAssessementRepository.save(self);
+	        }
+	    } else {
+	        AppraiseeSelfAssessement self = new AppraiseeSelfAssessement();
+	        self.setSubmittedOn(LocalDate.now());
+	        self.setOverallComments(assessment.getOverallComments());
+	        self.setOverallRating(assessment.getOverallRating());
+	        self.setComment(assessment.getComment());
+	        self.setRating(assessment.getRating());
+	        self.setEmpId(assessment.getEmpId());
+	        
+	        // Save to appraiseeSelfAssessementRepository
+	        appraiseeSelfAssessementRepository.save(self);
+	    }
+
+	    // Delete data from appraiseeSelfAssessementDraftRepository
+	    appraiseeSelfAssessementDraftRepository.deleteAll();
+
+	    // Send mail
+	    mailServiceImpl.sendMail();
+
+	    // Return the saved assessment
+	    return assessment;
+	}
+
+
+//    @Override
+//    public AppraiseeSelfAssessement insert(AppraiseeSelfAssessement assessment) throws MessagingException {
+//    	
+//    	if (!appraiseeSelfAssessementDraftRepository.isEmpty()) {
+//    		appraiseeSelfAssessementDraftRepository.
+//    	}
+//    	AppraiseeSelfAssessement self=new AppraiseeSelfAssessement();
+//    	self.setSubmittedOn(LocalDate.now());
+//    	self.setOverallComments(assessment.getOverallComments());
+//    	self.setOverallRating(assessment.getOverallRating());
+//    	self.setComment(assessment.getComment());
+//    	self.setRating(assessment.getRating());
+//    	self.setEmpId(assessment.getEmpId());
+//    	
+//		mailServiceImpl.sendMail();
+//    	
+//        return appraiseeSelfAssessementRepository.save(self);
+////        here we have taken assessement and self
+//    }
+    
+    @Override
+    public AppraiseeManagerAssessment insertmng(AppraiseeManagerAssessment review) {
+    	AppraiseeManagerAssessment manager=new AppraiseeManagerAssessment();
+    	manager.setReviewedOn(LocalDate.now());
+    	manager.setOverallMgrComments(review.getOverallMgrComments());
+    	manager.setOverallMgrRating(review.getOverallMgrRating());
+    	manager.setMgrComment(review.getMgrComment());
+    	manager.setMgrRating(review.getMgrRating());
+    	manager.setMgrId(review.getMgrId());
+        return appraiseeManagerAssessementRepository.save(manager);
+//      here we have taken review and manager
+
+    }
+    
+//    HERE IN THIS FUNCTION WE HAVE TAKEN 1 NAME AND ALL THE THREE FUNCTIONALITIES WILL BE PERFORMED USING THAT
+    
+    @Override
+    public AppraiseeSelfAssessementDraft insert(AppraiseeSelfAssessementDraft draft) {
+    	AppraiseeSelfAssessementDraft selfDraft=new AppraiseeSelfAssessementDraft();
+//    	selfDraft.setReviewedOn(LocalDate.now());
+    	selfDraft.setOverallComments(draft.getOverallComments());
+    	selfDraft.setOverallRating(draft.getOverallRating());
+    	selfDraft.setComment(draft.getComment());
+    	selfDraft.setRating(draft.getRating());
+    	selfDraft.setEmpId(draft.getEmpId());
+    	selfDraft.setSelfAssessment(draft.getSelfAssessment());
+        return appraiseeSelfAssessementDraftRepository.save(selfDraft);
+//      here we have taken review and manager
+
+    }
+//     this is for the master dummy table
+   
+    
+    @Override
+    public List<AppraiseeKra> getByKra(){
+    	List<AppraiseeKra> selfAll=appraiseeKraRepository.findAll();
+    	return selfAll;
+    }
+    
+//    HERE I HAVE TAKEN ALL BECAUSE THE DATA IS IN THE FORM OF THE ARRAY OR THE LIST.
+    
+    @Override
+    public AppraiseeDevelopmentGoalSetting getByDgId(Long dg_id) {
+        return appraiseeDevelopmentGoalSettingRepository.findById(dg_id).orElse(null);
+    }
+    
+    @Override
+    public AppraiseeSelfAssessement getById(Long sa_id) {
+        return appraiseeSelfAssessementRepository.findByempId(sa_id).orElse(null);
+    }
+    
+    @Override
+    public AppraiseeSelfAssessementDraft getByDraftId(Long empId) {
+        return appraiseeSelfAssessementDraftRepository.findByempId(empId).orElse(null);
+    }
+    
+    
+    
+    @Override
+    public AppraiseeDetails getByProfileId(Long id) {
+        Optional<AppraiseeDetails>app=appraiseeDetailsRepository.findById(id);
+        return app.orElse(null);
+    }
+    
+
+    @Override
+    public AppraiseeManagerAssessment getByManagerId(Long ma_id) {
+        return appraiseeManagerAssessementRepository.findBymgrId(ma_id).orElse(null);
+    }
+
+    @Override
+    public AppraiseeAnnualReview getByAnnualId(Long empId) {
+        return appraiseeAnnualReviewRepository.findById(empId).orElse(null);
+    }
+    
+    @Override
+	public AppraiseeAnnualReview insert(AppraiseeAnnualReview annual_review) {
+		
+		return appraiseeAnnualReviewRepository.save(annual_review);
+	}
+
+	@Override
+	public AppraiseeDevelopmentGoalSetting insert(AppraiseeDevelopmentGoalSetting development_goals) {
+		
+		return appraisee_development_goal_setting_Repository.save(development_goals);
+	}
+	
+	@Override
+    public boolean deleteSelfAsmDraft(Long empId) {
+        appraiseeSelfAssessementDraftRepository.deleteById(empId);
+        return true;
+    }
+
+
+	@Override
+	public List<MasterTableDummy> getByMgrId(Long mgrId) {
+		
+		return masterTableDummyRepository.findByMgrId(mgrId);
+	}
+
+ //THIS IS FOR THE EMPLOYEE STATUS TABLE.
+	public List<EmployeeStatus> getemployeePerformance() {
+		return employeeStatusRepository.findAll();
+	}
+
+	public EmployeeStatus postemployeePerformance(EmployeeStatus employeeStatus) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public EmployeeStatus postmanagerApproval(EmployeeStatus employeeStatus) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public EmployeeStatus insert(EmployeeStatus employee_status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public EmployeeStatus getemployeePerformance(EmployeeStatus employee_status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+   
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TESTING FILE FOR SERVICE:
+
+package com.pms.ServiceImpl;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+import java.time.LocalDate;
+//import java.time.LocalDate;
+//import java.util.Date;
+import com.pms.Model.AppraiseeManagerAssessment;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.pms.Model.AppraiseeSelfAssessement;
+import com.pms.repository.AppraiseeAnnualReviewRepository;
+import com.pms.repository.AppraiseeDetailsRepository;
+import com.pms.repository.AppraiseeDevelopmentGoalSettingRepository;
+import com.pms.repository.AppraiseeKraRepository;
+import com.pms.repository.AppraiseeManagerAssessmentRepository;
+import com.pms.repository.AppraiseeSelfAssessementRepository;
+import com.pms.repository.AppraiseeSelfAssessmentDraftRepository;
+import com.pms.repository.EmployeeStatusRepository;
+import com.pms.service.PMS_Service1;
+
+import jakarta.mail.MessagingException;
+
+@SpringBootTest
+class PMS_ServiceImpl1Test {
+	
+//	HERE WE HAVE AUTOWIRED THE SERVICE CLASS THAT WE ARE USING AND ALL THE REPOSITORIES ARE LINKED WITH THAT
+	
+	@Autowired
+	private PMS_Service1 pmsService1;
+	
+	@MockBean
+	private AppraiseeSelfAssessementRepository appraiseeSelfAssessementRepository;
+	
+	@MockBean
+	private AppraiseeSelfAssessmentDraftRepository appraiseeSelfAssessementDraftRepository;
+	
+	@MockBean
+	private AppraiseeManagerAssessmentRepository appraiseeManagerAssessmentRepository;
+	
+	@MockBean
+	private AppraiseeDetailsRepository appraiseeDetailsRepository;
+	
+	@MockBean
+	private AppraiseeKraRepository appraiseeKraRepository;
+	
+	@MockBean
+	private AppraiseeAnnualReviewRepository appraiseeAnnualReviewRepository;
+	
+	@MockBean
+	private AppraiseeDevelopmentGoalSettingRepository appraiseeDevelopmentGoalSettingRepository;
+	
+	@MockBean
+	private EmployeeStatusRepository employeeStatusRepository;
+	
+//	HERE I HAVE AUTOWIRED THE SERVICE CLASS AND MOCK BEANed ALL THE REPOSITORIES THAT I HAVE TAKEN AS A MODAL CLASS
+
+//	----------------------------------------------------------------------------------------------------------
+
+	@Test 
+	public void testInsertAppraiseeSelfAssessement() throws MessagingException {
+		LocalDate currentDate = LocalDate.now();
+		AppraiseeSelfAssessement appraiseeSelfAssessement =new AppraiseeSelfAssessement(10L , currentDate, "good",6,"best","4",20L);
+		when(appraiseeSelfAssessementRepository.save(appraiseeSelfAssessement)).thenReturn(appraiseeSelfAssessement);
+		assertEquals(appraiseeSelfAssessement, pmsService1.insert(appraiseeSelfAssessement));
+	}
+
+	@Test
+	public void testInsertmng() throws MessagingException {
+		LocalDate currentDate = LocalDate.now();
+		AppraiseeManagerAssessment appraiseeManagerAssessment = new AppraiseeManagerAssessment(10L,currentDate, "good","6",4,"best","4","better",20L);
+		// Mocking the behavior of appraiseeManagerAssessmentRepository.save(...)
+		when(appraiseeManagerAssessmentRepository.save(appraiseeManagerAssessment)).thenReturn(appraiseeManagerAssessment);
+		// Verify that the returned object is the same as the mocked one
+		System.out.println( pmsService1.insertmng(appraiseeManagerAssessment));
+		assertEquals(appraiseeManagerAssessment, pmsService1.insertmng(appraiseeManagerAssessment));
+	}
+
+	@Test
+	void testInsertAppraiseeSelfAssessementDraft() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetByKra() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetByDgId() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetById() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetByDraftId() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetByProfileId() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetByManagerId() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetByAnnualId() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testInsertAppraiseeAnnualReview() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testInsertAppraiseeDevelopmentGoalSetting() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testDeleteSelfAsmDraft() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetByMgrId() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetemployeePerformance() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testPostemployeePerformance() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testPostmanagerApproval() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testInsertEmployeeStatus() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetemployeePerformanceEmployeeStatus() {
+		fail("Not yet implemented");
+	}
+
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+APPLICATION PROPERTIES:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/pms_module
+spring.datasource.username=root
+spring.datasource.password=101628
+spring.jpa.show-sql=true 
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto=update
+#here in the application properties neccessary passwords are present herer of the database used and neccessary dependencies used 
+
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=skartikey169@gmail.com
+spring.mail.password=uggomjhmfabrkmbr
+spring.mail.properties.mail.smtp.host=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+
+server.port=9007
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+Java database Connectivity
+
+We can connect both the java code and database with the help of the driver class
+eg- oracle , my SQL--------------------------java code
+                              |
+                          oracleDriver.class
+
+"KNOW UR DATABASE AND THE DRIVER" 
+
+And we will use SELECT statement in our JDPC
+STEPS-
+1-load the driver
+2-et the connection
+3-make a desired statement
+4-execute the statement
+5-acquire the result if any
+6-close the result, statement, connection
+-------------------------------------------------------------------------------------------------------------
+DAO Data access object pattern ,Design pattern- all the requirements will be fulfilled by DAO
+
+POJO   POJI   POJIImpl
+
+POJO- plain old java object- must resemble with ur table that is the basic purpose of POJO, POJO is similar to the table 
+
+DAO= POJO+POJI+POJIIMPL +TABLE
+
+-----------------------------------------------------------
+
+class captain{
+   void CTA();
+}
+
+class viceCaptain{
+captain ViceCaptain= new captain;
+ViceCaptain.CTA();
+}
+
+class fielder{
+void CTAA();
+vicecaptain fielder=new vicecaptain;
+fielder.CTAA();
+}

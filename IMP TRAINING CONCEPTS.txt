@@ -1,0 +1,593 @@
+﻿LAST WEEK OF JAVA TRAINING
+----------------------------
+INTERFACES, INHERITANCE AND ABSTRACT CLASSES ARE VERY IMP *****  CONCEPTS OF CORE JAVA
+
+
+WEB APPLICATIONS:
+-------------------
+SERVLET- A simple java application or program to genrate dynamic web information web output and 
+it does not have a main method. 
+it is a simple java code defined in a package to have a super class-> HttpServlet.....to override...do Get() -> this method would accept user input from html page may interact with DB 
+MAIN FUCNTIONS OF SERVLRT- doGet(), init() , destroy()
+
+-----------------------------
+example-
+
+class flightenquiryServlet extends HTTpServlet{
+public void doGet()
+...........................
+}
+
+IMP KEYNOTES:
+
+To run a servlet we need 3 things a web application -> a server -> a client or browser.
+
+A java based web application has a standard structure -
+
+Flight project
+      |
+----------------
+|
+WEB-INFO
+|
+---------
+|
+Classes
+|
+FlightenquireyServlet
+
+--------------------------------------------------------------------------------
+STEPS FOR PROJET CREATION IN SPRING TOOL-
+
+new web project dynamic project-> new runtime apache 9.0->click on genrate web xml-> open the doubly-> src-> web app-> html file-> run on  APACHE server (always use this server)
+
+go to cmd->ping 10.16.8.255 (for accessing the machine of other)
+or instead of localhost:8080/Project/ write the - 10.16.8.255:8080/projectname/
+
+to go from one project to another in the same html file we use anchor tag a href
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+ECLIPSE STRUCTURE-For developers to manage the project
+
+         SRC
+          |
+----------------
+   MAIN         |
+     |         WEB APP
+   JAVA           |
+     |          ---------------
+SERVLET        INDEX.HTML    |
+                            WEB INF
+                             |
+                          -------------------------
+                           |         |           |
+                         CLASSES    WEB.XML     LIB
+----------------------------------------------------------------------------------------------------------------------------
+
+
+APACHE TOMCAT- LIVE ENVIORNMENT= PRODUCTION = DEPLOYMENT
+BY running the servlet deployment is done AUTOMATICALLY.
+
+1. ANNOTATIONS AND COMMENTS DIFFERENCE: COMMENTS CANNOT BE EXECUTED WHILE ANNOTATIONS CAN BE. EXAMPLE: WEB SERVLET
+
+2. WE HAVE TO COPY PASTE THE JAR FILE FROM OUR LOCAL DISK TO THE LIB FOLDER ALWAYS REMEMBER.
+
+3. SERVLET CONSISTS OF HAS-A METHODS.
+
+4. SERVLET ALWAYS COOPERATES WITH THE DAO.
+
+5. WE HAVE TO MAKE OUR OWN SERVLET.
+
+6. WITH THE HELP OF THE SERVLET, WE CAN PICK DETAILS FROM HTML AND POJOS, AND DAO IMPLEMENTATION IS DONE. 
+
+7. WE CAN CONNECT OUR SERVLET WITH THE DATABASE AND DIRECT CHANGES CAN BE MADE INTO THE HTML FILE IN THE BROWSER.
+ THAT MEANS IT IS HOW SERVLETS CONNECT IT TO THE DATABASE.
+
+8. WE CAN PERFORM THE UPDATE, INSERT, DELETE, AND CREATE OPERATIONS.
+
+9. MOVING FROM ONE PAGE TO ANOTHER PAGE IS CALLED AS WIRING/WIREFRAMING.
+
+------------------------------------------------------------------------------------------------------------
+BASIC DEVELOPMENT WORKFLOW OF ANY WEB APPICATION - TEST DRIVEN DEVELOPMENT (TDD)
+
+tables(CREATING DATABSE TABLES)
+|
+pojo
+|
+pojodao(REPOS)
+|
+no need to make impl- springJPA will automate all the CRUD operations for us (JPA will do 50% of the task)
+|
+service layers(PIZZA SERVICE,PIZZASERVICEIMPL same as for login and user), SERVICE LAYERS INTERACT WITH MULTIPLE REPOSITORIES AT ONE TIME AND MUTIPLE SERVICES INTERACT WITH EACH OTHER ALSO, And it checks the exceptions as well
+|
+controller/LAYERS - API Calls
+|
+Angular code /forms/ buttons(UI)
+
+----------------------------------------------------------------------------------------------------------
+
+JPA-
+JAVA OBJECT OR OBJECTS IS INSIDE THE MEMORY= VOLATILE
+                 |
+               STORE?
+                 |
+--------------------------------
+      |                     |
+     FILE                 DATABASE
+      |                     |
+  SERILIZATION            PERSISTENCE
+
+-TO MAKE ALL THESE CRUD OPERATIONS AUTOMATIC TO SAVE TIME AND SPACE - ORM(OBJECT REALTIONAL MAPPING) FRAMEWORKS WERE MADE AND AUTOMATED AND BOILER PLATE CODES WERE MADE AND "HIBERNATE" WAS CREATED
+-HIBERNATE IS A FRAMEWORK 
+-WHEN WE WRITE @Entity BEFORE A CLASS IT BECOMES A SPECIAL CLASS AND ALL THE TABLES CAN BE CONNECTED TOGTHER AND POJOS CONNECTED 
+
+---------------------------------------------------------------------------------------------------------------------
+A MAVEN PROJECT IS A TOOL TO ORGANIZE THE DEPENDECIES OF OUR PROJECT
+A MAVEN IS A JUST A TOOL FOR JPA AND IT IS A PROJECT MANAGEMENT TOOL, IT IS JUST A ASSISTANT 
+TO HAVE STABILITY ACROSS VARIOUS PLATFORMS MAVEN IS USED
+
+WE HAVE TO NOW MAKE A MAVEN PROJECT AND IMPLEMENT IT 
+MAVEN CAN BE REALLY USEFUL
+
+FOR JPA PROJECT WHAT THINGS WE NEED -
+
+Here is a list of things you need for a Java Persistence API (JPA) project, along with numbering for clarity:
+
+1. Maven Project: Set up a Maven project to manage dependencies and build your JPA project.
+
+2. Maven Dependencies for Hibernate and JUnit: In your `pom.xml` file, include dependencies for Hibernate (for JPA implementation) and JUnit (for testing).
+
+3. A Configuration File (META-INF/persistence.xml): Create a `persistence.xml` file in the `META-INF` directory to configure your JPA settings, including database connection details and persistence units.
+
+4. A POJO (Plain Old Java Object): Define Java classes that represent your entities or database tables. These classes will be annotated with JPA annotations to map them to database tables.
+
+5. Hibernate Framework Libraries as per Maven: Include Hibernate-related libraries and dependencies in your Maven `pom.xml` file. These dependencies should match the version of Hibernate you intend to use.
+
+6. A Client Code to Test It: Write Java code to test your JPA entities and database operations. You can create a separate test class or integrate tests into your application code.
+
+These components will help you set up a basic JPA project using Hibernate as the JPA provider, allowing you to interact with a database using Java classes and annotations.
+------------------------------------------------------------------------------------------------------------------------
+
+FROM PERSISTENCE -> ENTITY MANAGER FACTORY -> ENTITY MANAGER
+FROM IBIS HOTEL  -> GROUP OF CHEFS  -> 1 CHEF
+THIS IS AN ANALOGY EXAMPLE FOR THIS 
+
+POM- PROJECT OBJECT MODEL
+ENTITY MANAGER FACTORY -A PROGRAM TO PERFORM CRUD ON ANY TABLE
+
+TO INTIATE THE PROCESS TRANSACTION FUNCTION IS USED AND EVERYTHING SHOULD BE WRITTEN EBTWEEN BEGIN() AND COMMIT() FUNCTIONS
+
+TYPED QUERY-------------------
+A TypedQuery is a feature provided by the Java Persistence API (JPA) to execute database queries and retrieve results in a type-safe manner.
+It allows you to specify the type of the result that should be returned, which helps catch type-related errors at compile-time rather than runtime.
+TypedQuery is generally preferred over the older Query interface (which returns results as untyped objects) because it provides more type safety and helps in writing cleaner,
+more reliable code when working with JPA and databases.
+
+--------------------------------------------------------------
+AND WE ALSO WRITE THE TEST CASES AND HAVE THEM PASSED IN JPA |
+--------------------------------------------------------------
+
+THE AUTOMATION OF CRUD OPERATIONS IS DONE BY MAVEN JPA PROJECT
+--------------------------------------------------------
+JPA PROJECT DEPENDS UPON HIBERNATE, JUNIT, ORACLE JDBC AND TO DECLARE DEPENDENCIES IS VERY IMP...
+--------------------------------------------------------
+
+PERSISTENCE.XML IS VERY IMP FILE 
+
+THE JUNIT should always be = 5
+when we do run configurations the maven project
+and select the JUNIT ON THE LEFT SIDE
+-----------------------------------------------------------------------------------------------------------------------
+
+RELATIONSHIPS CONCEPT:
+ONE to ONE- 
+JOIN COLOUMN MEANS FOREIGN KEY IS THERE IN THE CODE
+AND ALWAYS ADD @ENTITY and @OneToOne 
+and to make both the classes as bidirectional we have to write @OneToOne in every classes
+HIBERNATE CREATES THE TABLE IN THE BACKGROUND AUTOMATICALLY
+
+
+CASCADE CONSTRAINT MEANS FORCEFUL DELETE EVEN IF TWO TABLES ARE INTERCONNECTED AND HAVE ONE TO ONE RELATIONSHIP
+
+merge and persist functions are really important
+TO Handle the error in the dates(dd/mm/yy) we have to throw parse exception
+----------------------
+PERSIST = INSERTING  |
+MERGE = UPDATING     |
+----------------------
+
+
+SPRING :
+---------------
+VIA SPRING WE CAN CREATE OBJECT,CLASSES, METHODS
+IT IS A FRAMEWORK AND SINCE WE HAVE TO WRITE A LOT OF DEPENDENCIES EARLIER IT WASTE TIME AND LOGIC, 
+HENCE SPRING WILL AUTOMATICALLY PERFORM ALL THESE DEPENDENCIES FOR US 
+to convert local method to remote method 
+to convert a non secured method to secured method
+
+Instead of writing: Mycar car = new Mycar();
+we have to just write the "Bean id" in the spring framework
+
+IN SPRING THERE ARE TWO TYPES OF OBJECTS - SINGLETON AND DOUBLE(PROTOTYPE) OBJECTS 
+
+------------------------------------------------
+<context:component-scan base-package="com">    | very imp line in spring
+------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------
+WHEN AFTER TRY ALL THINGS PROJECT TEST CASES DOSENT WORK THEN WE CAN GO TO PROPERTIES -> MAVEN -> UPDATE PROJECT
+
+SPRINGPROJECT
+       |
+------------------------------------------------------------------------------------------
+1-POM.XML    POJO/COMPONENET   2- SRPING CONFIG XML FILE      TEST CASE      META-INF
+                                                                                |3
+                                                                             PERSISTENCE.XML
+
+
+
+WHAT WE WILL MAKE ANYTHING IN SPRING BOOT WE HAVE TO MAKE IT IN "com.cms.project".  
+MEANS THE PROJECT PACKAGE NAME SHOULD BE SAME WE CAN MGO MAXIMUM AS "com.cms.project.bank" 
+
+---------------------------------------------------------------------------------------------------
+SPRING BOOT PERFORMS MULTI LEVEL IUNHERITANCE THEREFORE WE DONT HAVE TO WRITE CRUD OPERATIONS
+---------------------------------------------------------------------------------------------------
+@AUTOWIRED- it marks a constructor, methods automatically it is a feild level injection
+OPTIONAL CLASS IN JAVA UTIL - BY DEFAULT IT HAS A VALUE 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+IN SPRING BOOT REPOSITORY CALLING IS DONE.                                                                                              |
+TO SAVE,DELETE ANYTHING IN SPRING BOOT WE WRITE - "REPO.SAVE" ,"REPO.DELETE" THERE IS NOTHING LIKE "UPDATE" IN REPOSITORY SPRING BOOT.  |
+-------------------------------------------------------------------------------------------------------------------- -------------------
+
+
+************THIS IS THE FLOW/STEPS TO MAKE FILES IN THE SPRINGBOOT*************
+
+1- class name.java -> 2- class name repository.java -> 3- class name service.java -> 4- class name repository testing.java
+
+---------------------------------------------------------------------------------------------------------------------------
+
+@TEST
+@SpringBootTest
+----------------------------------------------------------
+CLASS IMPLEMENTS REPOSITORY 
+INTERFACE EXTENDS REPOSITORY 
+
+TEST ALL LAYER3 ALL REPOSITORIES IN J UNIT TEST CASES.AND WE HAVE TO TEST SINGLE CASE AT A TIME USING JUNIT-5, 
+AND EVERY LAYER SHOULD BE TESTED SEPRATELY BY WRITING ANNOTATIONS JUST BEFOR THE CLASS NAME. EXAMPLE OF ANNOTATIONS-@component , @entity , @repository, @autowired,@TEST, @SpringBootTest
+
+ARRAY LIST IS ITERABLE , CLONEABLE, EXECUTBLE THAT MEANS IT HAS A INTERFACE
+---------------------------------------------------------------------------------
+
+ALL THE USER DEFINED DATA TYPES INTERACT WITH INTERFACES AND COMES UNDER INTERFACES 
+IT IS ABT CHILD ACQUIRING PROPERTIES NOT PARENT GIVING PROPERTIES.
+
+-----------------------------------------------------------------------------------------
+
+SERVICE LAYER NOW -
+AT EVERY NEW LAYER WE HAVE TO WRITE ANNOTATIONS BEFORE THE CLASS NAME EG- FOR SERVICE LAYER WE HAVE TO WRITE "@SERVICE"
+WE HAVE TO WRITE SEPRATE @AUTOWIRED FOR EACH REPO AND WE HAVE TO WRITE HINTS IN THE CODE TO INTERACT WITH THE DATABSE.
+"FIND" FUNCTION IS ALSO USED ALOT OF TIMES IN THE SERVICE LAYER.
+
+----------------------------------------------------------------------------------------------------------------
+
+CONTROLLER LAYER :- TO RUN THIS WE HAVE TO RIGHT CLICK AND "RUN AS WEB SPRING BOOT APP"
+IT WILL INTERACT WITH THE SERVICE LAYER AND SEND REQUIREMENT TO SERVICE AND UI / MIDDLE OF BOTH 
+THE ANNOTATION THAT IS USE HERE IS "@RESTCONTROLLER" and "@GETMAPPING" AND EVERY FUNCTION WILL HAVE ITS DIFFRENT MAPPINGS.
+@PATHVARIABLE
+IN CONTROLLERS FOR TESTING WE USE "@PostMapping" and it means from the client the object is posted from the server to the Database(DB).
+
+1- class name controller.java ->  class name controllerImpl.java -> class name repository controller testing.java
+
+------------------------------------------------------------------------
+IN CONTROLLER LEVEL WE HAVE TO NOW USE "POSTMAN" FOR API IMPLEMENTATION |
+------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+ANGULAR JS -
+commands yo write in CMD prompt:-
+node -v
+npm -v
+NPM =node package manger
+npm install -g@angular/cli
+command line interface 
+
+ng --help
+ng new --help
+
+ng new my-first-project
+cd my-first-project
+ng serve
+
+mkdir myangular projects
+cd my angularprojects
+ng new my - dream -app
+
+TO RUN A ANGULAR PROJECT IN A COMMAND TERMINAL CMD-
+"ng serve"
+
+
+
+ABOUT ANGULAR- IT IS A MVC FRAMEWORK and it is used for Single page applications(SPA).
+
+in angular annotation is called as decorator and that corresponds to html and css files and it becomes a single unit
+
+M= model (data)
+V= viewl  (pages to show the data)
+c= control the model with the view
+
+"WE HAVE TO IMPLEMENT TYPESCRIPT HERE WITH ANGULAR  NOT JAVASCRIPT"
+------------------------------------------------------------------------------------------
+
+TO CONTINUE THE INSTALLATION FROM BEGINING IF NOT INSTALLED THEN WRITE -
+ng-new-mydream-app4
+
+
+                                   my-dream-app
+                                         |
+---------------------------------------------------------------------------------------------
+  |          |                |                 |              |              
+.angular    .vs code        node modules       src            *.json
+                                                |
+                                    ----------------------------------
+                                  app    assets   index.html  style.css
+
+----------------------------------------------------------------------------------------------------------------------------------
+logic= TS (type script) "app.component.ts" and we have to write the structure of page or HTML in "type script" only not in HTML  |
+----------------------------------------------------------------------------------------------------------------------------------
+
+ROOT= COMPLETE UNIT
+
+"LOGIN COMPONENT.TS, LOGIN COMPONENT.HTML, LOGIN COMPONENT.CSS, LOGIN COMPONENT.SPECS.TS"= LOGIN COMPONENT
+HTML , CSS COMBINE TOGETHER INTO TS
+AND SELECTOR MEANS
+
+TO CREATE NEW COMPONENT IN ANGULAR TS-
+IN THE TERMINAL write:
+------------------------
+"ng g c componentName"  |
+------------------------          
+"n=new g= genrate c= component"
+---------------------------------------------------------------------------------
+INTERPOLATION-Interpolation is a powerful tool for rendering dynamic content and creating templates that can adapt to changing data. 
+It helps separate the presentation layer from the application logic, making it easier to build dynamic and interactive user interfaces.
+
+INJECTING-
+
+RESIELIENT SYSTEM-
+
+FETCHING THE DATA-
+
+NG MODAL-
+
+
+
+****************web page is made of 100 of components*******************
+
+
+AFTER MAKING A NEW COMPONENT BY WRITING THE "ng g c Componentname" command in the terminal command prompt then new component will be added
+then you have to make the new changes in the "app component.html.css,ts"
+
+"from TS data is going to HTML'
+TWO WAY AND ONE WAY BINDING IN ANGULAR-MEANS DATA MOMENT FROM HTML TO TS AND VICE VERSA
+
+ng g c Simplecintrestc
+ts file- 4 variables
+html- fetch this value on screen with input type and {{}} OR ng model
+and calculate its values in TS file inside the class
+--------------------------------------------*************************************-------------------------------
+THERE ARE total 5 steps in ANGULAR:
+1-first create component - ng g c name
+2-component created 
+3-add variables and data members methods in TS file 
+4-and write inputs in the component .html file 
+5-now add modules in app.modules 
+6-and also in app component .html (here we have to call that html file of the new component made)
+7-then save it 
+8-and if node is Showing in the terminal then write "ng serve" in the command prompt
+--------------------------------------------------------------------------------------------------------------------
+
+FOR LOOP IN ANGULAR= *ngFor="let x of pizzas" where x is the variable decleration for the pizza declared.
+
+HOW TO INTIALISE TWO VARIABLE IN ANGULAR-
+Num1!:number;
+Num2!:number;
+
+Write a service and let it be used by lots of components in angular as well .
+
+FIRST THE APP RUNS HTML -> THEN CALCULATOR COMPONENT.TS -> 
+
+-THE TWO IMPORTANT FILES IN ANGULAR FRAMEWORK IS HTML, TYPESCIPT, NG MODULE, APP COMPONENT.HTML etc
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+if we want a function to directly fecth a URL and connect with it make it a "BASE URL".
+
+
+HTTP CLIENT MODULE:
+pizza service is calling the local pizza function from DB and thn to the main or html file and then displayed on the screen
+
+How to connect an image to the database then to the angular or UI:
+add the images path in the database thru springboot -> then add the images in the assests of the angular -> function is also created in the component.TS
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TO DISPLAY ANY BUTTON OR ANY COMPOENENT OF ANGULAR WE HAVE TO ADD - THE SELECTOR OF THAT COMPOENENT SHOULD BE ADDED IN THE "app.component.html"
+
+"FAILED TO LOAD RESOURCES": THIS ERROR MEANS BACKEND SPRING BOOT APPLICATION IS NOT EVEN STARTED .
+controller: @CrossOrigin
+
+TO ADD A NEW FUNCTION FROM ANGULAR TO DB - WE HAVE TO MAKE A NEW FUNCTION IN TS
+
+WHEN BUTTON,USER INPUT TYPE IS CLICKED FROM HTML -> IT GOES TO THE TYPESCRIPT FUNCTION -> THEN FROM TS IT DIRECTLY GOES TO THE BCKEND (DB)
+
+1- the POST function of angular performs the add functionality
+2- "Subscribe" function in angular- when you return a function that has observable object subscribe is used 
+3- this keyword in angular is mostly used when the function of an object is "void"
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+POSTMAN: IT IS BASICALLY A GATEWAY OR MIDDLE WAY TO CONNECT BACKEND SPRING BOOT AND SQL PLUS DB TABLES. means changes made in postman body is reflected in TABLES
+Postman is case senstive.
+
+*****************HOW TO CONNECT POSTMAN TO OUR SPRINGBOOT BACKEND:******************************
+
+1-import project or correct folder in the spring boot and then update the maven project always if any error occurs.
+2-now Run the spring boot project as "Run as springboot APP"
+3-before running make sure that the "application properties" file in the left make sure that the "password and username" is same as orcale SQL plus.
+4-Now open Postman and to make functionalities we have to use - POST, GET, PUT etc in the body of the postman 
+5-make sure that "JSON" is selected and we have to copy the "link of the URL" of the postman body FROM THE "controllerimpl.java" file of the spring tool suite. and accordingly DO changes in URL of CRUD operations and then press
+6-the send button of the postman and according to that changes will be made to the table of SQL plus of the BACKEND. 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ROUTING:HOW TO ROUTE ALL PAGES SUCH THAT ALL ARE IN SEQUENCE IN ANGULAR:
+************"IN ROUTING THE ROUTE ARRAY IS VERY IMPORTANT AND IT IS WRITTEN IN MODULE.TS"***************
+
+component for routing - EXAMPLE 
+ng g c about
+ng g c contact
+ng g c courses
+ng g c home
+ng g c courses/course (command for multi pager) OR ng g c products/product
+
+---------------------------------------------------------------------------------------------------
+HOW TO LOAD DATA FROM THE DATABASE INTO THE ANGULAR CODE THRU THE- SUBSCRIBE AND OBSERVE FUNCTIONS |
+---------------------------------------------------------------------------------------------------
+":" is a placeholder for creating a dynamic route
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+***************HOW TO DISPLAY "TWO SERVICES" AT THE SAME TIME IN THE ANGULAR CODE IN NG MODULE:********************
+
+providers: [ProductsService,CoursesService,...........,...........]
+bootstrap: [AppComponent]
+just add in the provider array by adding a comma
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+*****************TESTING OF LAYERS OF PROJECT IN SPRINGBOOT:**************
+1,2,3 LAYERS ARE TESTED TOGETHER 
+AND 4,5 LAYERS ARE TESTED TOGETHER
+THE PROCESS OF TABLE CREATIION IN THE DATABASE OR BACKEND STARTS IN THE SERVICE LAYER THAT IS 4th LAYER
+AND EVERY LAYER SHOULD BE TESTED AT EVERY INSTANT
+Kartikey: CONTROLLER AND SERVICE AND REPOSITORY IS TESTED AT EVERY CRUD OPERATION STEP
+
+**********IF OUR TABLE VALUES ARE NULL THEN THE ANGULAR AND POSTMAN WILL SHOW ERRORS AND ANY CRUD OPERTAIONS OR NECCESAARY CHANGES WILL NOT B DONE***********
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+HOW TO SEND EMAIL FROM THE SPRINGBOOT/SPRING AND THAT NOTIFICATION IS SHOWN ON GMAIL-
+
+1-Set Up Spring Boot Project:
+2-Add Dependencies:
+3-You'll need to include the Spring Boot Starter Mail dependency in your project. 
+4-You can do this by adding the following dependency to your pom.xml (if you're using Maven)
+5-Configure Email Properties:
+6-In your application.properties or application.yml file, configure the email properties for the SMTP server you want to use.
+7-Create an Email Service:
+8-Run the Application:
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**********SUBSCRIBE & OBSERVE functions in angular:**********
+"subscribe" is a specific method used with Observables to receive and handle emitted values, while "observe" is a broader concept in Angular used to describe monitoring changes in data, 
+often in the context of Angular's data binding and change detection mechanisms. Both are essential concepts for building reactive applications in Angular.
+
+-The subscribe() method is used to consume values emitted by an Observable. 
+ When you subscribe to an Observable, you provide a callback function that gets executed whenever the Observable emits a new value, error, or completes.
+
+-Observables are used for handling asynchronous data streams, such as HTTP requests, user input, and more means the real time data 
+Data changes using data binding or Angular's Change Detection mechanism.
+An Observable is like a source of data that can emit values over time.
+
+Example code :
+
+import { Observable } from 'rxjs';
+
+const myObservable = new Observable<number>((observer) => {
+  observer.next(1);//This function is called whenever the Observable emits a value
+  observer.next(2);//This function is called if there's an error during the Observable's operation.
+  observer.complete();//This function is called when the Observable completes, indicating that it has finished emitting values.
+});
+
+const subscription = myObservable.subscribe({
+  next: (value) => console.log(`Received value: ${value}`),
+  error: (error) => console.error(`Error: ${error}`),
+  complete: () => console.log('Observable complete'),
+});
+
+// Later, you can unsubscribe to prevent memory leaks:
+subscription.unsubscribe();
+
+
+So, in simple terms, this code sets up an Observable that emits the numbers 1 and 2, and we use a subscription to listen to and print these values to the console.
+Afterward, we unsubscribe from the Observable to clean up and prevent memory issues especially in larger applications.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+HOW TO ADD CRUD OPERATIONS IN ANGULAR:
+First of all create a diffrent myangular folder for "addProduct" by writing a command in cmd
+-cd myangular
+-ng new addProducts
+and Package will be installed.
+
+Now open new window in VS code and open that particular folder- addProduct
+now create addProduct components by ng g c ......
+3 addtional files we need to create for backend integration = Product.TS, MyResponse.TS, Product.service.TS
+
+AND NOW IN SPRINGTOOL SUITE make a MyResponse.java class inside the exception package.
+
+AND IN THE CONTROLLERIMPL.JAVA CLASS where there is a string write instead "MyResponse" in the code.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*************************SOME ANGULAR CONCEPTS************************
+
+1-ANGULAR CLI - it is a command line interface of angular that helps us to genrate angular codes automatically and saves lot of time.
+2-FOR ANGULAR THE LOCAL HOST SERVER IS - localhost 4200
+3-Angular is "component" based UI Architecture
+
+ROUTER/ROUTING:
+It basically routes or maps or connects pages together and then connect it to the browser.
+
+
+VERY IMP: WHILE WORKING WITH THE ANGULAR - THE MOST IMPORTANT EXTENSION IS "Angular console" that is now called as "Nx console". And it is very imp beacuse it helps in 
+genrating components.
+
+Most frequently used BUILD IN angular directives are - ngIf and ngFor(arrays for loop) and ngClass is also used.
+WE CAN ALSO CREATE OUR OWN DIRECTIVES BY: ng g d name.
+
+PIPES in ANGULAR:In Angular, "pipes" are a feature that allows you to transform the values displayed in templates. Pipes are a way to format, filter, or manipulate data 
+before it's displayed to the user. 
+They are particularly useful for tasks like formatting dates, currency, or applying custom filters to lists of data.
+
+*********To use a built-in pipe, you typically use the pipe operator "|".
+
+
+
+-SMART COMPONENTS CAN BE PAGE OR FORMS OR CONTAINER ANYTHING THAT HAS IMPORTANCE IN THE CODE AND CONTROLS THE ACTION OF THE PAGE
+-DUMB COMPONENTS IS ONLY CONCERNED WITH PRESENTATION LOGIC ONLY
+
+-BASICALLY SMART C= "FETCHES THE DATA"
+-AND DUMB C= "PRESENTS THE DATA"
+
+
+DIFFRENCE BETWEEN "ROUTER LINK" AND "a href LINK":
+
+when used in angular a component or the angular app will always go into the "reloading stage" everytime the a href link is clicked.
+while when used router link reloading or the process is considered interanlly and happens only once.
+
+path: animals,redirectTo: animal,pathMatch:full
+
+Command:
+ng g guard admin - this command protects our router or angular app from non admin users.
+
+
+
+
+
+
+
+
+
+

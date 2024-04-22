@@ -1,0 +1,600 @@
+
+
+                 *************REACT IS JUST PLAIN JAVASCRIPT LIBRARY AND COLLECTION OF COMPONENTS*******************
+
+JAVASCRIPT CONCEPTS WE NEED FOR REACT:
+
+1-SCOPING
+2-CALLBACK
+3-PASSING FUNCTIONS FROM ONE TO ANOTHER FUNCTION(IMP FOR EVENT LISTENERS)
+4-DIFFRENCE BETWEEN REFRENCE AND VALUE(REFRENCE-DYNAMIC changes can be done after creating while objects value cannot be edited)
+5-TYPE CONVERSION (== AND ===) IN JS
+6-SHORT CIRCUITING
+7-******ADVANCE ARRAY METHODS - MAP, FILTER, SORT, REDUCE etc in html,react*********
+8-IMMUTIABILITY
+9-ASYNCRONOUS NATURE OF CODES FOR CALLBACK, PROMISE, HOOKS
+10-CONCEPT OF MODULES(NODE MODULES)
+11-CONCEPTS OF ES6- SPREAD OPERATOR, DESTRUCTURING, ****TEMPLATE STRING LITERALS*******
+12-ASYNC AWAIT
+13-WEB RTC(REAL TIME COMMUNICATION)
+14-SOCKET IN JS
+
+
+
+-var, let, const, string methods
+
+-conditions,loops,for each loops
+
+-***********arrow functions, functions and their diffrence , LEXICAL THIS in arrow functions***********
+
+-Handling events.
+
+-Named imports and default imports and exports.
+
+-How to import javascript objects from 1 module to another module
+
+-REACT SPECIFIC CONCEPTS
+
+
+
+***********IN OUR CDL PROJECT FUNCTION COMPONENTS ARE USED IN PLACE OF CLASS COMPONENTS*************
+
+
+------------------------------
+SOME JAVASCRIPT CONCEPTS:    |
+------------------------------
+EXAMPLE OF FUNCTION IN JS:
+
+function calculateInHandSalary(grossIncome,incomeTax,employeePf,medicalim){
+
+const inhandSalary=grossIncome-incomeTax-employeePf-medicalim;
+return inhandSalary;
+}
+
+const grossIncome=40000;
+const incomeTax=5000;
+const employeePf=7000;
+const medicalim=4500;
+
+console.log(calculateInHandSalary(grossIncome,incomeTax,employeePf,medicalim));
+
+
+ARROW FUNCTIONS IN JS:
+Arrow functions do not have their own this binding. Instead, they inherit the this binding of the surrounding scope.
+This can be useful for event handlers and callback functions.
+Arrow functions cannot be used as constructors.
+Arrow functions cannot be used as methods.
+
+
+The this binding in JavaScript is a special variable that refers to the current object context. It is determined by how the function is called.
+Lexical this in arrow functions refers to the fact that arrow functions do not have their own this binding. Instead, they inherit the this binding of the surrounding scope.
+
+This can be useful for event handlers and callback functions, where you want the this binding to refer to the object that is calling the function.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+HANDLING EVENTS IN JS:
+Handling events in JavaScript allows you to respond to user interactions and other events that occur on a web page. 
+For example, you can use event handling to make a button change color when it is clicked, or to play a sound when a mouse enters a certain area of the page.
+
+There are two main ways to handle events in JavaScript:
+
+HTML event attributes: HTML event attributes allow you to assign JavaScript functions to HTML elements. When an event occurs on the element, the JavaScript function is called.
+JavaScript event listeners: JavaScript event listeners allow you to register JavaScript functions to be called when an event occurs. 
+You can register event listeners for any element on the page, as well as for the document, window, and other objects.
+
+*******To handle an event using a JavaScript event listener, you use the addEventListener() method.*****
+The addEventListener() method takes two arguments: the name of the event and the JavaScript function that you want to be called when the event occurs.
+
+
+Here are some examples of how event handling can be used:
+
+Make a button change color when it is clicked.
+Play a sound when a mouse enters a certain area of the page.
+Display a message when a user submits a form.
+Validate a form before it is submitted.
+Disable a button until a certain field in a form is filled in.
+Navigate to a different page when a certain link is clicked.
+Load a new image when a user selects a different option from a drop-down menu.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Whether to use named imports and exports or default imports and exports is a matter of personal preference. However, there are a few things to keep in mind:
+
+If you are exporting a single value from a module, it is generally best to use a default export. This makes it easier to import the value into other modules.
+If you are exporting multiple values from a module, you can use named exports to make it easier to organize your code.
+When importing values from a module, it is generally best to use named imports. This makes it more explicit what values you are importing, and it can help to prevent name collisions.
+Ultimately, the best way to decide which one to use is to consider the specific needs of your project.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Which one to use?
+
+Whether to export and import named objects or default objects is a matter of personal preference. However, there are a few things to keep in mind:
+
+If you are exporting a single object from a module, it is generally best to use a default export. This makes it easier to import the object into other modules.
+If you are exporting multiple objects from a module, you can use named exports to make it easier to organize your code.
+When importing objects from a module, it is generally best to use named imports. This makes it more explicit what objects you are importing, and it can help to prevent name collisions.
+Ultimately, the best way to decide which one to use is to consider the specific needs of your project.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1- Map() - The map() method creates a new array by applying a function to each element of the original array. 
+The function can be passed in as an argument to the map() method.
+
+const numbers = [1, 2, 3, 4, 5];
+
+// Create a new array by squaring each element of the original array
+const squaredNumbers = numbers.map((number) => number * number);
+
+console.log(squaredNumbers); // [1, 4, 9, 16, 25]
+
+
+2- Filter() - The filter() method creates a new array by returning only the elements of the original array that satisfy a given condition.
+The condition can be passed in as an argument to the filter() method.
+
+const numbers = [1, 2, 3, 4, 5];
+
+// Create a new array containing only the even elements of the original array
+const evenNumbers = numbers.filter((number) => number % 2 === 0);
+
+console.log(evenNumbers); // [2, 4]
+
+
+3- Reduce() - The reduce() method reduces the elements of an array to a single value by applying a function to each element of the array and accumulating the result.
+The function can be passed in as an argument to the reduce() method.
+
+
+const numbers = [1, 2, 3, 4, 5];
+
+// Calculate the sum of the elements of the array
+const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+console.log(sum); // 15
+
+
+4- sort()- The sort() method sorts the elements of an array in ascending or descending order. 
+The sort() method can be passed in a function that compares two elements of the array and returns a value indicating which element should come first.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TEMPLATE STRING LITERALS:
+
+Template string literals, also known as template strings, are a new feature of JavaScript that was introduced in ES6. 
+Template strings allow you to create strings that contain embedded expressions. This can be useful for creating strings that are dynamic and data-driven.
+
+example:
+const name = "Bard";
+const age = 23;
+
+const greeting = `Hello, my name is ${name} and I am ${age} years old.`;
+
+console.log(greeting); // Hello, my name is Bard and I am 23 years old.
+
+Here are some of the benefits of using template strings:
+
+Template strings make it easy to embed expressions in strings.
+Template strings can be used to create multi-line strings.
+Template strings are more readable and maintainable than traditional string concatenation.
+
+
+Template strings can also be used to bind data to React components. For example, the following code binds the name variable to the <h1> element:
+
+const name = "Bard";
+
+// Return the <h1> element with the name variable bound to it
+return <h1 title={name}>{name}</h1>;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+NOW REACT JS:
+
+So basically te whole idea of the react is "to break the whole HTML Code or framework into diffrent COMPONENTS" and then combine them together to make the application.
+like for video- thumbnail component, like component etc
+
+1-React lets you build user interfaces out of individual pieces called components. Create your own React components like Thumbnail, LikeButton, and Video. 
+Then combine them into entire screens, pages, and apps.
+
+2-React components are javascript functions.
+
+3-JSX is "javascript syntax" extension popularised by react.One of the most powerful features of JSX is its capability to pass props (short for properties) to React components.
+
+4-REACT is bascically a tool that help to write our front end code to look easier and then sync together all the components.
+React components receive data and return what should appear on the screen. You can pass them new data in response to an interaction,
+like when the user types into an input. React will then update the screen to match the new data.
+
+5-React is a library. It lets you put components together, but it doesn’t prescribe how to do routing and data fetching. 
+To build an entire app with React, we recommend a full-stack React framework like Next.js or Remix.
+
+6-React is also an architecture. Frameworks that implement it let you fetch data in asynchronous components that run on the server or even during the build. 
+Read data from a file or a database, and pass it down to your interactive components.
+
+7-React lets you start streaming HTML while you’re still fetching data, progressively filling in the remaining content before any JavaScript code loads. 
+On the client, React can use standard web APIs to keep your UI responsive even in the middle of rendering.
+
+8-React uses one-way data flow, passing data down the component hierarchy from parent to child component. 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+***SOME RULES TO WRITE THE REACT CODE****** -
+1- FOR CREATING ANY COMPONENT IN REACT in the code its basic thing every component requires a function so first WE WILL CREATE A FUNCTION OF THAT COMPONENT AND 
+INSIDE THAT FUNCTION WE WILL CREATE VARIABLES OR DATA MEMEBERS FOR THAT FUNCTION in short for the compoenent.
+
+2- HOOKS THAT ARE NEED TO BE USED ARE ALWAYS WRITTEN IN THE START OF THE CODE AND THEY ARE IMPORTED ALWAYS in the begininig.
+
+3- COMPONENT IS BASICALLY A FUNCTION ONLY.
+
+4- ALWAYS USE "ARROW FUNCTIONS IN REACT CODE FOR EVENT LISTERNERS" ....... ITS VERY IMPORTANT. OTHERWISE IT WILL NOT BE AN EFFICIENT WAY AND ERROR OCURS.
+
+5- ALWAYS CREATE COMPONENTS IN REACT WITH ".JSX" extension.
+
+6- WHEN WE WRITE HTML CODE IN JAVASCRIPT FORM THEN IT IS CALLED AS JSX or JSX is basically like HTML code
+
+7-HOOKS ARE ALWAYS WRITTEN AT THE TOP OF THE FUNCTIION 
+  they are not written in "conditions, loops,after returns" 
+
+8-REACT COMPOENENTS ALWAYS FOLLOW A SIMILAR STRUCTURE THAT IS:
+
+  HOOKS AT THE TOP
+   |
+  HELPER FUNCTIONS/COMPONENTS FUNCTION/CODE
+   |
+  RETURN STATEMENT THAT HAS ALL JSX
+
+9- TRY NOT TO PUT EVERYTHING IN SAME COMPONENT, BUILT DIFFRENT COMPONENTS FOR EASE AND LESS COMPLEXITY AND ALOS 
+FOR LARGE APPLICATION BEACUSE IF ONE ERROR OCCURS IT WILL AFFECT OTHERS.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+********THINKING IN REACT:***************
+
+A-When you build a user interface with React, you will first break it apart into pieces called components. 
+B-Then, you will describe the different visual states for each of your components.
+C-Finally, you will connect your components together so that the data flows through them.
+
+**********To implement a UI in React, you will usually follow the same five steps.***************
+Start with the mockup DESIGN HOW YOUR UI SHOULD LOOK LIKE -JSON API returns some data
+
+Step 1: Break the UI into a component hierarchy -Start by drawing boxes around every component and subcomponent in the mockup and naming them.
+        single responsibility principle, that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents.
+
+        Now that you’ve identified the components in the mockup, arrange them into a hierarchy. 
+        Components that appear within another component in the mockup should appear as a child in the hierarchy.
+
+Step 2: Build a static version in React 
+        To build a static version of your app that renders your data model, you’ll want to build components that reuse other components and pass data using props.
+        Props are a way of passing data from parent to child.
+        If you’re familiar with the concept of state, don’t use state at all to build this static version. 
+        State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don’t need it
+
+        You can either build “top down” by starting with building the components higher up in the hierarchy 
+        (like FilterableProductTable) or “bottom up” by working from components lower down (like ProductRow).
+
+        After building your components, you’ll have a library of reusable components that render your data model. Because this is a static app, the components will only return JSX.
+        The component at the top of the hierarchy (FilterableProductTable) will take your data model as a prop. 
+
+                 -----------------------------------------------------------       --------------------
+                 | In React, data that changes over time is called state.  |      | STATE MEANS CHANGE |
+                 -----------------------------------------------------------       --------------------
+
+Step 3: Find the minimal but complete representation of UI state
+        To make the UI interactive, you need to let users change your underlying data model. You will use "STATE" for this.
+
+        State is like a Memory: Think of "state" as a memory for your app, a place where it remembers important information.
+        Keep State DRY: The main rule is to avoid repeating the same information in state. In other words, don't store the same thing in multiple places.
+        Minimal State: Only store the absolute minimum information that your app needs to remember. Don't clutter it with unnecessary stuff.
+        Compute on Demand: Instead of storing every piece of information, calculate or figure out other details when you need them. For example, if you're making a shopping list, just remember the items in the list, not the total number of items.
+        In simpler terms, it's like having a notepad to remember things, and you should only write down the most important things once. If you can calculate something from what you've already written, don't write it down again. This makes your notepad (or "state") tidy and efficient.
+
+
+Step 4: Identify where your state should live 
+
+        So basically here in this 4th step we have to implement the states/Hooks in our react code or with our components.
+        the best way to identify where and which component the state should be used is that "where the user interaction is maximum" and 
+        there are chances of having the maximum changes 
+
+       a: Often, you can put the state directly into their common parent.
+       b: You can also put the state into some component above their common parent.
+       c: If you can’t find a component where it makes sense to own the state, create a new component solely for holding the state and 
+          add it somewhere in the hierarchy above the common parent component.
+
+       ****WHEREVER "STATES"/HOOKS ARE WRITTEN IN THE CODE OF REACT THIS MEANS THESE COMPONENT ARE CHANGING WITH THE UI AND THERE IS USER INTERACTION.*****
+
+
+Step 5: Add inverse data flow 
+
+      app renders correctly with props and state flowing down the hierarchy. But to change the state according to user input,
+      you will need to support data flowing the other way: the form components deep in the hierarchy need to update the state in FilterableProductTable.
+      (NOW FROM CHILD TO PARENT)
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+
+
+**************FOR EVERY STATE WE HAVE TO INTIALISE ITS INTIAL VALUES/STATE ALWAYS IN THE ROUND BRACKETS.*****************
+//function FilterableProductTable({ products }) {
+  //const [filterText, setFilterText] = useState('');
+  //const [inStockOnly, setInStockOnly] = useState(false);
+
+
+
+
+
+
+************example code******************
+
+import { useState } from 'react';  // THIS IS THE HOOK THAT IS IMPORTED AT THE STARTING OF THE CODE 
+
+function SearchableVideoList({ videos }) {     // HERE WE HAVE CREATED A FUNCTION FOR OUR COMPONENT- VIDEOLIST
+  const [searchText, setSearchText] = useState('');   // HERE WE HAVE CREATED THE DATA MEMBERS FOR OUR COMPOENENTS OR FUNCTION
+  const foundVideos = filterVideos(videos, searchText);  // HERE WE HAVE CREATED THE DATA MEMBERS FOR OUR COMPOENENTS OR FUNCTION
+  return (
+    <>
+      <SearchInput                                           // HERE THE COMPONENT OR THE FUNCTION RETURNS THE VALUES OR THE MAIN BODY OF THE COMPONENT
+        value={searchText}
+        onChange={newText => setSearchText(newText)} />       // ON CHANGE IS BASCIALLY AN EVENT HANDLER OF REACT THAT WHEN YOU HAVE SEARCHED FOR A TEXT AND ACCORDING TO THAT THE NEW VALUES OR CHANGES ARE SHOWN ON THE SCREEN
+      <VideoList
+        videos={foundVideos}
+        emptyHeading={`No matches for “${searchText}”`} />
+    </>
+  );
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1-In react or JSX "class" is a reserved keyword. So in react write "className" instead of "class".
+2-const [newItem, setnewItem]=useState("")  THE SYNTAX IS LIKE THIS ONLY ONE ARGUMENT IS ANY WORD THEN OTHER WILL BE SETANYWORD
+3-Use state always takes a deafult value.
+4-the event listner in react is onChange and everytime we click on that key it will call that event lsitener and value gets changed everytime and the state gets restart again
+and when we change the "setItem" value it always renders again the whole code.
+5-e.target.value- where e is the event object or value of any input.
+
+SUPPOSE YOU REMOVE THE "ONCHANGE" EVENT HANDLE FROM THE INPUT TYPE THEN BY DEFAULT SINCE THE USE STATE VALUE IS EMPTY IN THE BEGINING SO EVEN IF WE PRESS 
+THE INPUT VALUE FROM THE USER SIDE THEN ALSO IT WILL NOT BE UPDATED THAT IS WHY 
+IT IS VERY IMPORTANT .
+
+6-ANYTHING WRITTEN UNDER CURLY BRACES IS TRATED AS JAVASCRIPT
+7-SPREAD OPERATOR (...) spreads the previous values to the existing or the current values.
+
+
+
+*******************WHENEVER YOU CHANGE THE VALUE OF A STATE VARIABLES IT ALWAYS RE RENDERS THE WHOLE COMPONENT AGAIN*********************** 
+
+
+In Next.js, when you use the Link component to navigate between pages, you should not nest an anchor tag (<a>) within it.
+ Instead, you should define the link's content directly within the Link component.
+----------------------------------------------------------------------------------------------------------------------------------
+
+To add a dark mode feature to your code using React's useState hook, you can follow these steps:
+
+Import useState from React.
+Create a state variable to track whether the page is in dark mode or not.
+Create a function to toggle the dark mode state.
+Add conditional CSS classes based on the dark mode state.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+whenever we are going to start something to design then if we dont know how to
+start then we can just start by taking a "Section" then we can start designing under that diffrent components.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+PROPS and PROP DRILLING CONCEPT IN REACT JS:
+-Prop drilling in React refers to the process of passing data from a parent component down to a deeply nested child component
+through a series of intermediate components.
+
+-// GrandparentComponent.js
+import React from 'react';
+import ParentComponent from './ParentComponent';
+
+function GrandparentComponent() {
+  const data = 'Hello from Grandparent';
+
+  return (
+    <div>
+      <ParentComponent data={data} />
+    </div>
+  );
+}
+
+export default GrandparentComponent;
+
+// ParentComponent.js
+import React from 'react';
+import ChildComponent from './ChildComponent';
+
+function ParentComponent({ data }) {
+  return (
+    <div>
+      <ChildComponent data={data} />
+    </div>
+  );
+}
+
+export default ParentComponent;
+
+// ChildComponent.js
+import React from 'react';
+
+function ChildComponent({ data }) {
+  return (
+    <div>
+      <p>{data}</p>
+    </div>
+  );
+}
+
+export default ChildComponent;
+
+In this example, data is passed from GrandparentComponent to ParentComponent, and then from ParentComponent to ChildComponent.
+This is prop drilling. While it works, it can become cumbersome when you have many levels of nesting and multiple components need access to the same data. 
+
+To address this issue, you can consider using state management libraries like "Redux or the Context API in React", 
+which allow you to manage and share state across your application without the need for prop drilling. This can make your code cleaner and more maintainable.
+
+---------------------
+USE OF CONTEXT API: |
+---------------------
+// DataContext.js
+import React, { createContext, useContext, useState } from 'react';
+
+const DataContext = createContext();
+
+export const useData = () => {
+  return useContext(DataContext);
+};
+
+export const DataProvider = ({ children }) => {
+  const [data, setData] = useState('Hello from Context');
+
+  return (
+    <DataContext.Provider value={{ data, setData }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+In this example, the DataContext and useData custom hook are used to manage and share the data value across components without the need for prop drilling.
+
+WRITE THIS BEFORE YOUR REACT CODE FOR BETTER CODE.
+
+----------------------------------------------------------------------------------------------------------------------------
+CONTEXT API:
+
+-The Context API is a built-in feature of React that provides a way to share data, such as state or configuration settings, between components
+-useful when multiple components at different levels of the component hierarchy need access to the same data.
+-The Context API is particularly helpful when you have global application settings, themes, user authentication, 
+or any other data that multiple components across your app need to access. Across multiple pages.
+- It simplifies the sharing of this data and reduces the need for prop drilling.
+-THE DISADVANTAGE OF PROP DRILLING IS REMOVED BY CONTEXT API.
+
+SAMPLE CODE for CONTEXT-API:
+
+// Create a context
+const MyContext = React.createContext('default value');
+
+// App component
+function App() {
+  return (
+    <MyContext.Provider value="Context data">
+      <div>
+        <ChildComponent />
+      </div>
+    </MyContext.Provider>
+  );
+}
+
+// Child component that consumes the context
+function ChildComponent() {
+  const contextData = React.useContext(MyContext);
+  return <div>Context Data: {contextData}</div>;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+SPREAD OPERATOR:
+Spread Operator
+The JavaScript spread operator (...) allows us to quickly copy all or part of an existing array or object into another array or object.
+
+const numbersOne = [1, 2, 3];
+const numbersTwo = [4, 5, 6];
+const numbersCombined = [...numbersOne, ...numbersTwo];
+
+We can use the spread operator with objects too
+and it is used extensively with the react hooks.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const handleChangeComments = (e) => {
+  const key = e.target.name;
+  const value = e.target.value;
+  setInfo({ ...info, [key]: value });
+}
+console.log(info);
+
+EXPLANATION FOR THIS -
+Suppose a user wants to fill a form and that details would be obviously need to be saved in that form so that to handle that input functionality so that it can be done with  the help of Javascript and for that 
+we will take and event handler function for that and it will get triggered when user start filling that form and for filling the form there are two key parameters- value and name .
+name is the category of the field (eg-name,id,age etc) and the value is the actual thing that we will fill in the input fields.
+and all these values or (THE STATE WILL BE UPDATED ) will be saved with the help of  STATE VARIABLE, Updates the state variable info using the setInfo function. 
+and the form that we are filling bascially filling the info...so this spread operator will spread the  existing properties of info and adds or updates a property with the key
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ONE STATE VARIBALE CAN HOLD THE VALUES OF ONE API AT A TIME in React JS 
+
+EXAMPLE - if you taken state variable as -"value" then two apis cannot be accessed at the same time
+
+
+ useEffect(() => {
+    axios.get("http://localhost:8080/api/getBySelfAsmAll")
+      .then((response) => setSelfAss(response.data))
+      .catch(err => console.log(err))
+  }, [])
+
+  console.warn(value,"value")
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/getByProfile/1")
+      .then((response) => setValue(response.data))
+      .catch(err => console.log(err))
+  }, [])
+
+  console.warn(value,"value")
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+IF WE WANT TO PERFORM DIFFRENT THINGS IN A SAME FUNCTION THEN IT CAN BE POSSIBLE IN REACT AS WELL AND WE CAN ACHIVE IT THRU BACKEND -
+ example in springtool:
+@Override
+    public appraisee_self_assessement insert(appraisee_self_assessement assessment) {
+    	appraisee_self_assessement self=new appraisee_self_assessement();
+    	self.setSubmitted_on(LocalDate.now());
+    	self.setOverall_comments(assessment.getOverall_comments());
+    	self.setOverall_rating(assessment.getOverall_rating());
+    	self.setComment(assessment.getComment());
+    	self.setRating(assessment.getRating());
+        return appraiseeSelfAssessementRepository.save(self);
+
+
+In this code snippet -"Submitted_on, Overall_comments, Overall_rating, Comment, rating" is called under the same function.
+
+
+Also the front end code-console.log(overallValue,"overallValue"); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

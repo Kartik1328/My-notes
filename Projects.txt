@@ -1,0 +1,565 @@
+
+--to do
+pk 
+fk 
+check
+unique
+nn
+defatlt constraint
+
+login table 
+user id 
+password
+
+many to many---
+4 users
+
+
+Projects
+1. Insurance
+2. Shopping online
+3. Scheme for farmer  --> bidder 
+4. General Insurance
+5. National Scholership portal
+  
+=======================================================
+
+--National Scholership portal
+student will apply for the scholarship --> Institure will process ---> State Nodal officer (SNO) Ministry State District Zone. 
+	-----------------> Central government ---> for  approval
+ 
+
+Student
+adhar_number 		pk
+student_name
+dob
+gender 
+institute_code		fk
+account_number		fk
+student_password 	
+
+
+Institute
+institute_code 		pk
+institute_name
+principle_name
+location
+institute_password
+is_verified
+
+Contact
+adhar_number		fk
+institute_code		fk
+state
+distinct
+address_line
+pincode
+mobile_number
+email
+
+Personal
+adhar_number		fk
+father_name
+mother_name
+marital_status
+annual_income
+cast
+is_disable
+
+Bank
+account_number		pk
+acc_holder_name
+ifsc_code
+bank_name
+bank_balance
+
+Education
+adhar_number		fk
+10th_percent	
+12th_percent	
+9th_percent	
+admission_fee
+tution_fee
+10th_year
+12th_year
+9th_year
+
+
+SNO
+username
+password
+
+Scholarship
+adhar_number		fk
+NTSE
+pragati
+PMS
+already_NTSE
+already_Pragati
+already_PMS
+
+
+
+--tables
+create table institute (
+institute_code varchar(5) primary key, 
+institute_name varchar(70), 
+principle_name varchar(30), 
+location varchar(5), 
+institute_password varchar(20));
+
+
+create table SNO (
+sno_username varchar(10), 
+sno_password varchar(20));
+
+
+create table bank_details (
+account_number varchar(12) primary key,
+ account_holder_name varchar(30), 
+ifsc_code varchar(20), 
+bank_name varchar(30),
+bank_balance int);
+
+
+create table student (
+aadhar_number varchar(12) primary key, 
+student_name varchar(30), 
+dob date, 
+gender varchar(6), 
+institute_code varchar(5), 
+account_number varchar(12), 
+student_password varchar(20), 
+foreign key (institute_code) references institute(institute_code), 
+foreign key (account_number) references bank_details(account_number));
+
+
+create table personal_details (
+aadhar_number varchar(12), 
+father_name varchar(30), 
+mother_name varchar(30), 
+marital_status boolean, 
+annual_income int, caste varchar(16),
+ is_disable boolean, 
+foreign key (aadhar_number) references student (aadhar_number));
+
+
+create table scholarship (
+aadhar_number varchar(12),
+ ntse varchar(10), pragati varchar(10),
+pms varcha(10),already_NTSE int,
+already_Pragati int,
+already_PMS int, 
+foreign key (aadhar_number) references student (aadhar_number));
+
+
+create table contact_details (
+aadhar_number varchar(20), 
+institute_code varchar(5), 
+state varchar(50), 
+district varchar(20), 
+address_line varchar(100), 
+pincode varchar(6), mobile_number varchar(10), 
+email varchar(30), 
+foreign key (aadhar_number) references student (aadhar_number), 
+foreign key (institute_code) references institute (institute_code));
+
+
+create table educational_details (
+aadhar_number varchar(12), 
+tenth_percentage float, 
+twelth_percentage float, 
+ninth_percentage float, 
+admission_fee int, 
+tuition_fee int, 
+tenth_passing_year int, 
+twelth_passing_year int, 
+ninth_passing_year int, 
+foreign key (aadhar_number) references student (aadhar_number)); 
+
+
+
+
+
+
+
+
+
+================================
+Scheme for farmer
+login_details		: admin@gmail.com         
+email
+password 
+ 
+
+
+
+1. Farmer_Details 	Table 
+Farmer_id		pk 	: should be generated auto
+Full_name
+Contact_number
+Email_id
+Address
+city
+state
+pincode 
+accountNo
+IFSC_code 
+adhar_card		: pdf
+pan_card			: pdf 
+password
+farmer_wallet 		: default 0
+
+2. Crop_details
+Crop_id 		pk
+Crop_name	rice / wheat / cotton/ ...
+fertilizer_type	value : organic / urea / potassium 
+quantity
+base_price	 or base_amount
+soil_ph_certificate	: jpg / pdf
+Farmer_id		FK 
+sold_or_not 	value will be : sold , not sold 
+
+
+3. Bidder_details
+Bidder_id		Pk	: auto generated
+Bidder_name 
+contact_no
+email
+address
+city 
+state
+pincode 
+account_no
+IFSC_code 
+adhar_card		: pdf
+pan_card			: pdf 
+trading_certificate 		: pdf 
+password
+bidder_wallet 		: default 50000
+
+
+4. Bidding_details
+crop_id			: fk
+crop_name			
+bidder_id			: fk 
+bid_amout			: 		> base_amount 
+
+
+Tables
+1]
+CREATE TABLE FARMERDETAILS3 (
+    FARMER_ID INT GENERATED BY DEFAULT AS IDENTITY(START WITH 100, INCREMENT BY 1) PRIMARY KEY,
+    FARMER_NAME VARCHAR(25),
+    CONTACT_NO VARCHAR(14),
+    EMAIL VARCHAR(20),
+    ADDRESS VARCHAR(50),
+    CITY VARCHAR(15),
+    STATE VARCHAR(15),
+    PINCODE VARCHAR(10),
+    ACCOUNT_NO VARCHAR(15),
+    IFSC VARCHAR(15),
+    AADHAR_CARD VARCHAR(46),
+    PAN_CARD VARCHAR(46),
+    PASSWORD VARCHAR(20),
+    FARMER_WALLET INT
+);
+
+INSERT INTO FARMERDETAILS3 (FARMER_NAME, CONTACT_NO, EMAIL, ADDRESS, CITY, STATE, PINCODE, ACCOUNT_NO, IFSC, AADHAR_CARD, PAN_CARD, PASSWORD, FARMER_WALLET)
+VALUES
+    ('John Doe', '1234567890', 'john@example.com', '123 Main St', 'Cityville', 'Stateville', '12345', '0123456789', 'IFSC123', '1234-5678-9012', 'ABCP12345', 'secretpassword', 500),
+    ('Jane Smith', '9876543210', 'jane@example.com', '456 Elm St', 'Townsville', 'Stateville', '54321', '9876543210', 'IFSC456', '5678-9012-3456', 'XYZQ56789', 'mypassword', 750),
+    ('Michael Johnson', '5558889999', 'michael@example.com', '789 Oak St', 'Cityville', 'Stateville', '67890', '1230987654', 'IFSC789', '0987-6543-2109', 'LMNO12345', 'securepass', 300);
+
+
+2]
+CREATE TABLE CROP_DETAILS (
+    CROP_ID INTEGER GENERATED BY DEFAULT AS IDENTITY(START WITH 301, INCREMENT BY 1) PRIMARY KEY,
+    CROP_NAME VARCHAR(20) NOT NULL,
+    FERTILIZER_TYPE VARCHAR(30),
+    QUANTITY VARCHAR(12),
+    SOIL_PH_CERTIFICATE VARCHAR(40),
+    FARMER_ID INT,  
+    SOLD_OR_NOT VARCHAR(10),
+    FOREIGN KEY (FARMER_ID) REFERENCES FARMERDETAILS3(FARMER_ID)
+); 
+
+
+INSERT INTO CROP_DETAILS (CROP_NAME, FERTILIZER_TYPE, QUANTITY, SOIL_PH_CERTIFICATE, FARMER_ID, SOLD_OR_NOT)
+VALUES
+    ('Wheat', 'Organic', '1000 kg', 'pH 6.5', 100, 'Not Sold'),
+    ('Corn', 'Chemical', '800 kg', 'pH 5.8', 101, 'Sold'),
+    ('Rice', 'Organic', '1200 kg', 'pH 6.2', 102, 'Not Sold');
+
+
+3]
+
+CREATE TABLE BIDDER_DETAILS (
+    BIDDER_ID INTEGER GENERATED BY DEFAULT AS IDENTITY(START WITH 701, INCREMENT BY 1) PRIMARY KEY,
+    BIDDER_NAME VARCHAR(25),
+    CONTACT_NO VARCHAR(14),
+    EMAIL VARCHAR(20),
+    ADDRESS VARCHAR(50),
+    CITY VARCHAR(15),
+    STATE VARCHAR(15),
+    PINCODE VARCHAR(10),
+    ACCOUNT_NO VARCHAR(15),
+    IFSC VARCHAR(15),
+    AADHAR_CARD VARCHAR(26),
+    PAN_CARD VARCHAR(26),
+    TRADING_CERTIFICATE VARCHAR(26),
+    PASSWORD VARCHAR(20),
+    BIDDER_WALLET INT
+);
+
+
+INSERT INTO BIDDER_DETAILS (BIDDER_NAME, CONTACT_NO, EMAIL, ADDRESS, CITY, STATE, PINCODE, ACCOUNT_NO, IFSC, AADHAR_CARD, PAN_CARD, TRADING_CERTIFICATE, PASSWORD, BIDDER_WALLET)
+VALUES
+    ('Alice Smith', '9876543210', 'alice@example.com', '123 Elm St', 'Townsville', 'Stateville', '54321', '9876543210', 'IFSC456', '1234-5678-9012', 'ABCP12345', 'TC123456', 'mypassword', 1000),
+    ('Bob Johnson', '5558889999', 'bob@example.com', '456 Oak St', 'Cityville', 'Stateville', '67890', '1230987654', 'IFSC789', '5678-9012-3456', 'XYZQ56789', 'TC789012', 'securepass', 1500),
+    ('Charlie Davis', '1234567890', 'charlie@example.com', '789 Maple St', 'Villagetown', 'Stateville', '12345', '0123456789', 'IFSC123', '0987-6543-2109', 'LMNO12345', 'TC567890', 'secretpass', 800);
+
+
+4]
+
+CREATE TABLE BIDDING_DETAILS (
+	CROP_ID INT FOREIGN KEY REFERENCES CROP_DETAILS(CROP_ID),
+	CROP_NAME VARCHAR(20),
+	BIDDER_ID INT FOREIGN KEY REFERENCES BIDDER_DETAILS(BIDDER_ID),
+	BID_AMOUNT INT
+); 
+
+INSERT INTO BIDDING_DETAILS (CROP_ID, CROP_NAME, BIDDER_ID, BID_AMOUNT)
+VALUES
+    (313, 'Wheat', 701, 1500),
+    (314, 'Corn', 702, 1800),
+    (315, 'Rice', 703, 2000);
+
+
+
+=====================================================
+Shopping online Project
+
+User		: ru
+email	: admin
+password   
+note
+only admin can change the product details
+
+--1
+create sequence seq_productid
+start with 1
+increment by 1;
+
+--2
+create table products(
+product_id	 int constraint product_id_pk primary key ,
+product_name  varchar2(20),
+product_description varchar2(20),
+product_category varchar2(20) constraint product_category_ck check(product_category in ('electronics', 'clothes', 'accessories')),
+product_price number(10,2),		
+product_quantity number(3),
+product_brand varchar2(20) , 
+product_rating number(5,2), 		
+retailer_no number(3) );
+
+--note
+retailer_no number(3) constraint retailer_no_fk references retailer(retailer_no));
+
+--3
+insert into products values (seq_productid.nextval, 'samsung_note_7', 'desc1', 'electronics', 10000, 30, 'samsung', 4.5,1 );
+insert into products values (seq_productid.nextval, 'samsung_note_10', 'desc1', 'electronics', 10000, 10, 'samsung', 4.6,1 );
+commit;
+select * from products ;
+
+--to update
+update products 
+set product_description='new description'
+where product_id=1;
+
+--to delete
+delete from products 
+where product_id=1;
+
+select * from products 
+order by product_category ;
+
+--LOBS data type in Oracle
+1 CLOB	: character large object  : 4gb
+2 BLOB	: binary large object  : photoes, video, audio
+3 NCLOB : national character large object  : 
+4 Bfile  : binary file : .doc, .xls, .ppt
+
+
+Products
+product_id		: pk	: auto
+product_name 
+product_description 
+product_category		: electronics
+product_price		
+product_quantity
+product_brand 		: samsung , LG, Dell, 
+product_image 	
+product_rating 		: 
+Retailer_no 		: fk
+
+sorting on :reating,  product_price, product_name 	: order by
+where : product_brand
+where : product_description 
+where :  product_name 
+
+
+sort by category or rating or price 
+
+Retailer			: dml
+Retailer_no 		: pk auto ge 
+Retailer_name
+Retailer_email
+Retailer_phone
+Retailer_address
+Retailer_pincode 
+varification_status 		: true / false    
+
+crud 
+
+User_details		insert , select
+user_id		: pk : auto 
+user_name
+user_email
+user_phone
+user_address
+user_postalcode 
+
+
+order 	insert, update, delete, select 
+product_id	
+qty
+order _date
+status 
+
+==============================================================
+General Insurance
+
+login
+userid
+pass
+
+AccountHolder_details 
+account_no		: pk
+reference_no
+first_name
+middlename
+lastname
+fathername
+birthdate
+email
+mobile
+adharcardno
+residential_address
+residential_city
+residential_state
+residential_pincode
+permenent_address
+permenent_city
+permenent_state
+permenent_pincode
+occupation_type
+gross_annual_income
+source_of_income
+status		: approved / rejected 
+loginid
+password
+
+
+
+
+
+Account_transaction 
+acc_no		:pk : auto
+balance 		default 1000
+getBalance()
+amount
+transaction_type		: withdraw / deposit / transfer 
+transaction_date
+remark 
+
+
+Payee_details
+first_name 
+nick name 
+account_no		: fk
+ifsc code 
+bank name 
+
+
+show_balance()		: accept the account number 
+
+--tables
+create table users(
+userid int  GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+username varchar(255),
+password varchar(255),
+PhoneNumber varchar(15),
+Emailid varchar(255)
+)
+
+
+create table admins(
+adminid int GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+username varchar(255),
+password varchar(255)
+)
+
+
+create table plan(
+planid int GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+vehicleId int,
+userid int,
+constraint fk_vehicle_id1 foreign key (vehicleId) references vehicle(vehicleId),
+constraint fk_user_id_plan foreign key (userid) references users(userid),
+planDuration int,
+planType varchar(255),
+expirydate date,
+planAmount int
+)
+
+
+ALTER TABLE claim
+ADD userid int;
+
+create table VEHICLE(
+userid int,
+constraint fk_userid foreign key (userid) references users(userid),
+vehicleId int GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+vehicleType varchar(255),
+vehicleManufacturer varchar(255),
+vehicleModel varchar(255),
+drivingLicense varchar(255),
+purchaseDate date,
+registrationNumber varchar(255),
+engineNumber varchar(255),
+chasisNumber varchar(255)
+)
+
+create table policy(
+policy_id int GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+userid int,
+constraint fk_user_id_policy foreign key(userid) references users(userid),
+vehicleid int,
+constraint fk_vehicle_id foreign key(vehicleid) references vehicle(vehicleid),
+start_date date,
+end_date date,
+premium_amount decimal(10,2),
+policy_status boolean,
+policy_number int
+)
+
+create table CLAIM(
+claim_id int GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+policyNumber int,
+constraint fk_policy_number foreign key (policynumber) references policy(policy_number),
+claimStatus boolean,
+claimAmount decimal(10,2),
+incidentLocation varchar(255),
+incidentDate varchar(255)
+)

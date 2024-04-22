@@ -1,0 +1,91 @@
+CRUD API with Node js and Express js and Mongo DB.
+
+steps-
+create a folder by name of Node API and then install package.json in that by: npm init -y
+
+Create a js file for node and writing the functions,
+
+node server.js =command to run the file 
+"serve": "node server.js"=added a variable in scripts in package.json
+npm run serve=by writing thsi command the server.js file will run.
+
+git init- to installs git in our project.
+when we install or intialise git in our project then the color of the files changes to green color.
+and if we dont want any particular file or dependencies to be part of the git or ignore then
+ we write that thing in our gitignore file. and the color of that will change to gray color.
+
+git add . //this adds every file in the git
+git commit -m "intail project" // this is to commit any changes in the file through git
+
+
+Commits are the core building block units of a Git project timeline. 
+Commits can be thought of as snapshots or milestones along the timeline of a Git project.
+Commits are created with the git commit command to capture the state of a project at that point in time.
+
+NODEMON- It is used while working with node js and teh advantage for that is we dont need to stop our application again and again everytime a new change is occured.
+
+Node API is running on port 3000
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+Node API is running on port 3000
+
+NOW CONNECTING APP WITH DATABSE with mongo DB.
+we need to install mongoos- npm install mongoose
+
+AND NOW WE HAVE TO DO THINGS IN MONGO DB- we have create account there and create our first cluster or first database in that by fulfilling all the confiogurations like username, password
+and then we have to connect to the databse or get Add your connection string into your application code.
+
+SO BASICALLY TO CONNECT MONGOOSE TO MONGO DB THIS CODE WE HAVE TO TYPE AND CHNAGE THE USERNAME AND PASSWORD.
+mongodb+srv://DavyJones:<password>@cluster0.23ldtoa.mongodb.net/?retryWrites=true&w=majority
+
+AND IF IT HAS CONNECTED SUCCESSFULLY THEN A message will come connected to DB.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+NOTE- IT SEEMS THAT IF WE USE MONGO "atlas" then we have to create schema before creating a model
+      but if WE ARE USING COMPASS mongo DB then we dont need to create a schema directly model class can be made.
+
+
+1- NOW CREATE A MODEL FOR DATA IN DATABASE-
+
+THE whole concept is almost same as in sprinboot backend.
+
+for this we know that:
+
+                                                                                    A mongo DB is there{here the Data of these classes will be there}                  
+                                                                                                         |
+                                                                                                         |
+                                                                                                         |
+                                                                                                         |
+                                                                                                         |
+                                                                                                         |
+{The models in Node app component will fetch data from the DB that is mongoose}NODE APP------------------|
+                                                                       |
+                                                                       |
+                                                                       |
+                                                      model classes will be here with their schemas
+
+
+
+---In order to create a product model we need to create schema for that.---
+
+const productSchema = mongoose.Schema
+const Product = mongoose.model("Product", productSchema);
+module.exports=Product;
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+2- NOW USE MODEL TO SAVE DATA IN THE DATABASE:
+
+app.post('/product', (req, res) => {
+  console.log(req.body)
+  res.send(req.body)
+})
+
+----- NOW FOR THE JSON DATA TO BE POSTED FROM THE POSTMAN SO THAT OUR APPLICATION CAN UNDERSTAND THE JSON FORMAT- a JSON middleware is used.
+app.use(express.json());
+
+
+
+
+
+

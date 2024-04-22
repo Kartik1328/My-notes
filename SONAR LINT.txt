@@ -1,0 +1,135 @@
+SONAR LINT:
+
+*********************************WE CANNOT REFRACTOR THE CODE AT EVERY PLACE OTHERWISE IT WILL CHANGE THE LOGIC OF THE FUNCTION****************************************
+
+SONAR LINT-
+FIXING THE CODE ISSUES/REFRACTORING THE CODE:
+
+*********************************THESE ALL FOR MANAGER SCREENS***************************
+
+1- Cognitive complexity:
+To solve this issue --->
+Refactoring with Helper Functions: Identify repeating patterns or sections of code within ManagerScreen() that can be extracted into separate helper functions. This can help to simplify the main function and make it more readable.
+Splitting Into Smaller Functions: Break down the ManagerScreen() function into smaller, more focused functions. Each function should ideally have a single responsibility, making it easier to understand and test.
+EXAMPLE:function ManagerScreen() {
+
+
+2-Optional chaining:Optional chaining is a newer feature in JavaScript that provides a more concise and safe way to access nested properties of an object that may be null or undefined.
+To solve this issue --->
+you can replace the logical OR (||) operator with optional chaining (?.).
+EXAMPLE:let ratingBreak =overallValue&& overallValue.mgrRating.split(",") || [];
+
+FROM THIS*****- mgrScr && mgrScr.map((i, index) => (
+TO THIS*****- mgrScr?.map((i, index) => (
+
+
+3-Non-empty statements should change control flow or have at least one side-effect (javascript:S905)
+response.data is not doing anything meaningful, as it neither changes control flow nor has any side-effects. 
+To solve this issue --->
+if it's not serving any purpose in your code, you should remove it to improve readability and maintainability.
+EXAMPLE: from this :response.data;
+         to this:console.log(response.data);
+
+
+4-The return value of "useState" should be destructured and named symmetrically (javascript:S6754)
+To solve this issue ---> write correct and proper naming conventions.
+EXAMPLE:const [commentMng, setCommentsMng] = useState([])
+
+
+5-Anchor tags should not be used as buttons (javascript:S6844)
+To solve this issue --->
+If you need to create a hyperlink, use the <a> tag with a href attribute. If you need to create a button, use the <button> tag. Dont use it together.
+This is because anchor tags are typically used for navigation, while buttons (<button>) are used for actions 
+EXAMPLE:<li><a href="#" onClick={() => moveToggle(0)} className="text-lg">Goal Setting</a></li>
+              <li><a href="#" onClick={() => moveToggle(1)} className="text-lg">Self Assessment</a></li>
+              <li><a href="#" onClick={() => moveToggle(2)} className="text-lg">Manager Assessment</a></li>
+              <li><a href="#" onClick={() => moveToggle(2)} className="text-lg">Annual Review</a></li>
+ IN THIS USE "BUTTON TAG" INSTEAD 
+
+
+6-Non-interactive DOM elements should not have an interactive handler (javascript:S6848)
+To solve this issue---> you should consider using a different DOM element that is semantically appropriate for interactive behavior. In this case, you can use a <button> element instead of a <div>.
+EXAMPLE:<div className='flex mb-2 hover:cursor-pointer' onClick={()=>handleNavigate(row)}>
+
+
+
+7-JSX list components should not use array indexes as key (javascript:S6479)
+to solve this issue--->
+
+From this-  <div key={index} className='grid grid-cols-7'>
+To this-    <div key={`${index}-${someUniqueIdentifier}`} className='grid grid-cols-7'>
+AND
+From this- <p key={lineIndex}>{line.trim()}</p>
+To this- <p key={`${lineIndex}-${line.trim()}`}>{line.trim()}</p>
+
+
+
+8- IN SOME PLACES it is asked by sonarlint to use a "button" tag instead of the "div" tag but here we cannot replace it because the whole logic will get changed.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+*********************************NOW ALL FOR SELF APPRAISAL SCREENS***************************
+
+
+1- Cognitive complexity:
+EXAMPLE:function SelfAppraisel() {
+
+2-Instead of using var- we can use let and const in the functions AND IT IS GOOD TO USE "let" because it can be declared again and if we use "const" then we cannot reused or re declared it again in our code.
+
+3-onMouseOut must be accompanied by onBlur for accessibility. Also the mouse event should be accomapnied by keyboard event.
+to solve this issue--->
+WE can add an onBlur event handler to the button along with the onMouseOut event handler. This ensures that users who navigate using a keyboard or assistive technologies can also trigger the desired behavior.
+
+EXAMPLE:
+<button 
+  onMouseOut={() => { setPopoverVisible1(false) }} 
+  onBlur={() => { setPopoverVisible1(false) }}
+>
+  Submit
+</button>
+
+
+4-Non-interactive DOM elements should not have an interactive handler (javascript:S6848)
+to solve this issue--->
+Instead of using the span tag you should use interactive elements like <button> or <a> for actions such as navigation.
+
+EXAMPLE:<span to="/managerView" onClick={()=>renderMV(row)}>Harish Kumar</span>
+
+
+5- Sonar Lint gives a recommendation for the arrow functions as well- cell: (row) => (row.submittedOnn !==null ? <FaCheck style={blueIconStyle}/> : ""),
+
+AND THE RECOMMENDATION THAT IYT GIVES-Move this component definition out of the parent component and pass data as props.
+
+*****BUT WE DONT NEED TO MAKE THIS CHANGE....********
+
+
+6-Non-interactive DOM elements should not have an interactive handler (javascript:S6848)
+to solve this issue--->
+Since you're using a to attribute, it seems like you might intend for it to act as a link. In that case, switching to an <a> tag is appropriate.
+
+EXAMPLE:From this:<span to="/managerView" onClick={()=>renderMV(row)}>Harish Kumar</span>
+TO this:<a href="/managerView" onClick={(event) => { event.preventDefault(); renderMV(row); }}>Harish Kumar</a>
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+*********************************NOW ALL FOR MANAGER REVIEW SCREEN***************************
+
+
+IT IS ALMOST SAME AS THE OTHER MODULES...!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
